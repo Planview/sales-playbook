@@ -1,0 +1,7 @@
+@import "variables";
+
+@import "../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap";
+
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+    display: none !important;
+}

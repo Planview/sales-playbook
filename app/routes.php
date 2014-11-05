@@ -16,6 +16,10 @@ Route::get('/', function()
 	return View::make('hello');
 });
 
+Route::get('/playbook', function () {
+    return View::make('playbook');
+});
+
 Route::group(['prefix' => 'api'], function() {
     Route::resource('documents', 'DocumentsApiController', ['only' => ['index', 'show']]);
     Route::resource('customers', 'CustomersApiController', ['only' => ['index', 'show']]);

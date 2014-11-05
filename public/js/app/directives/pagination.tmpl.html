@@ -1,0 +1,20 @@
+<div class="row">
+    <div class="col-sm-9">
+        <p>Results {{pageStartIndex() + 1}}&ndash;{{pageEndIndex() + 1}} of {{numberResults()}}</p>
+        <ul class="pagination" style="margin: 0;">
+          <li ng-class="{ 'disabled': isFirstPage() }"><a ng-click="pagePrevious()">&laquo;</a></li>
+          <li ng-repeat="page in pagingArray()" ng-class="{ 'active': isCurrentPage(page) }"><a ng-click="goToPage(page)">{{page}}</a></li>
+          <li ng-class="{ 'disabled': isLastPage() }"><a ng-click="pageNext()">&raquo;</a></li>
+        </ul>
+    </div>
+    <div class="col-sm-3 form-group" style="margin-bottom:0;">
+        <label for="per-page">Results Per Page</label>
+        <select ng-model="perPage" class="form-control" id="per-page">
+            <option ng-value="5">5 Results Per Page</option>
+            <option ng-value="10">10 Results Per Page</option>
+            <option ng-value="25">25 Results Per Page</option>
+            <option ng-value="50">50 Results Per Page</option>
+            <option ng-value="100">100 Results Per Page</option>
+        </select>
+    </div>
+</div>

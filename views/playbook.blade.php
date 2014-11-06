@@ -19,13 +19,13 @@
                             <label for="fullsearch">Search Everything</label>
                             <input type="text" ng-model="searchText" id="fullsearch" class="form-control">
                         </div>
-                        <div src-playbook-select-multiple id="markets" collection="markets" collection-label="Markets" collection-model="filter.markets" item-label="name"></div>
-                        <div src-playbook-select id="types" collection="types" collection-label="Types" collection-model="filter.document_type" item-label="name"></div>
-                        <div src-playbook-select id="regionsCustomer" collection="operatingRegions" collection-label="Operating Regions" collection-model="filter.operating_region" item-label="name"></div>
-                        <div src-playbook-select id="regionsPlanview" collection="planviewRegions" collection-label="Planview Regions" collection-model="filter.planview_region" item-label="name"></div>
-                        <div src-playbook-select id="industries" collection="industries" collection-label="Industries" collection-model="filter.industry" item-label="name"></div>
-                        <div src-playbook-select id="customers" collection="customers" collection-label="Customers" collection-model="filter.customer" item-label="name"></div>
-                        <div src-playbook-select-multiple id="competitors" collection="competitors" collection-label="Competitors" collection-model="filter.competitors" item-label="name"></div>
+                        <div src-playbook-select-multiple id="markets" collection="markets" collection-label="Markets" collection-model="arrayFilter.customer_verbose.markets" item-label="name"></div>
+                        <div src-playbook-select id="types" collection="types" collection-label="Types" collection-model="filter.document_type_id" item-label="name"></div>
+                        <div src-playbook-select id="regionsCustomer" collection="operatingRegions" collection-label="Operating Regions" collection-model="filter.customer_verbose.operating_region_id" item-label="name"></div>
+                        <div src-playbook-select id="regionsPlanview" collection="planviewRegions" collection-label="Planview Regions" collection-model="filter.customer_verbose.planview_region_id" item-label="name"></div>
+                        <div src-playbook-select id="industries" collection="industries" collection-label="Industries" collection-model="filter.customer_verbose.industry_id" item-label="name"></div>
+                        <div src-playbook-select id="customers" collection="customers" collection-label="Customers" collection-model="filter.customer_id" item-label="name"></div>
+                        <div src-playbook-select-multiple id="competitors" collection="competitors" collection-label="Competitors" collection-model="arrayFilter.customer_verbose.competitors" item-label="name"></div>
                         <hr>
                         <button type="button" ng-click="resetCategories()" class="btn btn-default btn-block">
                             <span class="text-danger">
@@ -36,9 +36,9 @@
                 </form>
             </div>
             <div class="col-sm-8">
-                <nav src-pagination collection="documents | filter:searchText" per-page="perPage" page="page"></nav>
+            <pre ng-bind="filter | json"></pre>
                 <div class="panel-group" id="documents">
-                    <div class="panel panel-default" ng-repeat="doc in documents | filter:searchText | paging:{page: page, perPage: perPage}">
+                    <div class="panel panel-default" ng-repeat="doc in documents | filter:searchText | playbookSearch:filter | paging:{page: page, perPage: perPage}">
                         <div class="panel-heading">
                             <h4 class="panel-title">
                                 <a data-toggle="collapse" data-parent="#documents" ng-href="#collapse@{{$index}}" ng-bind="doc.title"></a>
@@ -67,7 +67,7 @@
                                         <dt ng-show="doc.customer_verbose">Customer</dt>
                                         <dd>
                                             <span ng-bind="doc.customer_verbose.name"></span>
-                                            <span ng-show="!doc.customer.can_use_name" class="label label-danger">Do Not Use Customer Name</span>
+                                            <span ng-show="!doc.customer_verbose.can_use_name" class="label label-danger">Do Not Use Customer Name</span>
                                         </dd>
                                         <dt ng-show="doc.customer_verbose.competitors.length">Competitors</dt>
                                         <dd ng-repeat="competitor in doc.customer_verbose.competitors" ng-bind="competitor.name"></dd>

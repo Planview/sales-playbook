@@ -38,7 +38,7 @@
             <div class="col-sm-8">
                 <div class="row">
                     <div class="col-sm-9">
-                        <pagination boundary-links="true" items-per-page="perPage" num-pages="pages" total-items="filteredDocuments().length" ng-model="page" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;" max-size="5"></pagination>
+                        <pagination class="playbook-pagination" boundary-links="true" items-per-page="perPage" num-pages="pages" total-items="filteredDocuments().length" ng-model="page" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;" max-size="5"></pagination>
                     </div>
                     <div class="col-sm-3 form-group" style="margin-bottom:0;">
                         <label for="per-page">Results Per Page</label>
@@ -97,7 +97,7 @@
                 <hr>
                 <div class="row">
                     <div class="col-sm-9">
-                        <pagination boundary-links="true" items-per-page="perPage" num-pages="pages" total-items="filteredDocuments().length" ng-model="page" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;" max-size="5"></pagination>
+                        <pagination class="playbook-pagination" boundary-links="true" items-per-page="perPage" num-pages="pages" total-items="filteredDocuments().length" ng-model="page" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;" max-size="5"></pagination>
                     </div>
                     <div class="col-sm-3 form-group" style="margin-bottom:0;">
                         <label for="per-page">Results Per Page</label>

@@ -3,8 +3,9 @@
 namespace Api;
 
 use DocumentType;
+use Response;
 
-class DocumentTypesApiController extends \BaseController {
+class DocumentTypesController extends \BaseController {
 
     /**
      * Display a listing of the resource.

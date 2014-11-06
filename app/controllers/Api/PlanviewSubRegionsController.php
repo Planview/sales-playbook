@@ -1,6 +1,11 @@
 <?php
 
-class PlanviewSubRegionsApiController extends \BaseController {
+namespace Api;
+
+use PlanviewSubRegion;
+use Response;
+
+class PlanviewSubRegionsController extends \BaseController {
 
 	/**
 	 * Display a listing of the resource.

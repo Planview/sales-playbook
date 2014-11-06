@@ -1,6 +1,11 @@
 <?php
 
-class IndustriesApiController extends \BaseController {
+namespace Api;
+
+use Competitor;
+use Response;
+
+class CompetitorsController extends \BaseController {
 
     /**
      * Display a listing of the resource.
@@ -9,7 +14,7 @@ class IndustriesApiController extends \BaseController {
      */
     public function index()
     {
-        return Response::json(Industry::all());
+        return Response::json(Competitor::all());
     }
 
 
@@ -21,7 +26,7 @@ class IndustriesApiController extends \BaseController {
      */
     public function show($id)
     {
-        return Response::json(Industry::findOrFail($id));
+        return Response::json(Competitor::findOrFail($id));
     }
 
 

@@ -1,6 +1,11 @@
 <?php
 
-class CustomersApiController extends \BaseController {
+namespace Api;
+
+use Customer;
+use Response;
+
+class CustomersController extends \BaseController {
 
     /**
      * Display a listing of the resource.

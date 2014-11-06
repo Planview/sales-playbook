@@ -20,14 +20,14 @@ Route::get('/playbook', function () {
     return View::make('playbook');
 });
 
-Route::group(['prefix' => 'api'], function() {
-    Route::resource('documents', 'DocumentsApiController', ['only' => ['index', 'show']]);
-    Route::resource('customers', 'CustomersApiController', ['only' => ['index', 'show']]);
-    Route::resource('document-types', 'DocumentTypesApiController', ['only' => ['index', 'show']]);
-    Route::resource('industries', 'IndustriesApiController', ['only' => ['index', 'show']]);
-    Route::resource('competitors', 'CompetitorsApiController', ['only' => ['index', 'show']]);
-    Route::resource('markets', 'MarketsApiController', ['only' => ['index', 'show']]);
-    Route::resource('operating-regions', 'OperatingRegionsApiController', ['only' => ['index', 'show']]);
-    Route::resource('planview-regions', 'PlanviewRegionsApiController', ['only' => ['index', 'show']]);
-    Route::resource('planview-subregions', 'PlanviewSubRegionsApiController', ['only' => ['index', 'show']]);
+Route::group(['prefix' => 'api', 'namespace' => 'Api'], function() {
+    Route::resource('documents', 'DocumentsController', ['only' => ['index', 'show']]);
+    Route::resource('customers', 'CustomersController', ['only' => ['index', 'show']]);
+    Route::resource('document-types', 'DocumentTypesController', ['only' => ['index', 'show']]);
+    Route::resource('industries', 'IndustriesController', ['only' => ['index', 'show']]);
+    Route::resource('competitors', 'CompetitorsController', ['only' => ['index', 'show']]);
+    Route::resource('markets', 'MarketsController', ['only' => ['index', 'show']]);
+    Route::resource('operating-regions', 'OperatingRegionsController', ['only' => ['index', 'show']]);
+    Route::resource('planview-regions', 'PlanviewRegionsController', ['only' => ['index', 'show']]);
+    Route::resource('planview-subregions', 'PlanviewSubRegionsController', ['only' => ['index', 'show']]);
 });

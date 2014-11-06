@@ -1,6 +1,11 @@
 <?php
 
-class DocumentsApiController extends \BaseController {
+namespace Api;
+
+use Document;
+use Response;
+
+class DocumentsController extends \BaseController {
 
     /**
      * Display a listing of the resource.

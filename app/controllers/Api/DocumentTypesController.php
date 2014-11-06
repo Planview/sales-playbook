@@ -1,6 +1,10 @@
 <?php
 
-class OperatingRegionsApiController extends \BaseController {
+namespace Api;
+
+use DocumentType;
+
+class DocumentTypesApiController extends \BaseController {
 
     /**
      * Display a listing of the resource.
@@ -9,7 +13,7 @@ class OperatingRegionsApiController extends \BaseController {
      */
     public function index()
     {
-        return Response::json(OperatingRegion::all());
+        return Response::json(DocumentType::all());
     }
 
 
@@ -21,7 +25,7 @@ class OperatingRegionsApiController extends \BaseController {
      */
     public function show($id)
     {
-        return Response::json(OperatingRegion::findOrFail($id));
+        return Response::json(DocumentType::findOrFail($id));
     }
 
 

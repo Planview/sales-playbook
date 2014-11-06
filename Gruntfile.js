@@ -1,3 +1,5 @@
+/* global module */
+
 module.exports = function (grunt) {
     'use strict';
 
@@ -5,7 +7,7 @@ module.exports = function (grunt) {
 
     grunt.initConfig({
         sass: {
-            dist: {
+            dev: {
                 options: {
                     unixNewlines: true,
                     sourcemap: 'auto',
@@ -19,6 +21,24 @@ module.exports = function (grunt) {
                     ext: '.css'
                 }]
             }
+        },
+        jshint: {
+            options: {
+                jshintrc: true
+            },
+            all: ['Gruntfile.js', 'public/js/**/*.js']
+        },
+        watch: {
+            scripts: {
+                files: '**/*.js',
+                tasks: ['jshint:all']
+            },
+            sass: {
+                files: ['**/*.scss', '**/*.sass'],
+                task: ['sass:dev']
+            }
         }
     });
+
+    grunt.registerTask('default', ['sass:dev', 'jshint:all', 'watch']);
 };

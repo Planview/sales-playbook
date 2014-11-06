@@ -10,7 +10,9 @@ define([
                 sanitize;
 
             sanitize = function (object) {
-                if (!_.isPlainObject(object)) return object;
+                if (!_.isPlainObject(object)) {
+                    return object;
+                }
 
                 _.forEach(object, function (val, key, obj) {
                     if (_.isObject(val)) {
@@ -31,7 +33,9 @@ define([
                 var newObj = _.cloneDeep(object);
                 sanitize(newObj);
 
-                if (_.isEmpty(newObj)) return input;
+                if (_.isEmpty(newObj)) {
+                    return input;
+                }
 
                 var newResponse = _.where(input, newObj);
 

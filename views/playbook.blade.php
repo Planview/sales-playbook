@@ -19,13 +19,13 @@
                             <label for="fullsearch">Search Everything</label>
                             <input type="text" ng-model="searchText" id="fullsearch" class="form-control">
                         </div>
-                        <div src-playbook-select-multiple id="markets" collection="markets" collection-label="Markets" collection-model="arrayFilter.customer_verbose.markets" item-label="name"></div>
+                        <div src-playbook-select-multiple id="markets" collection="markets" collection-label="Markets" collection-model="filter.customer_verbose.markets" item-label="name"></div>
                         <div src-playbook-select id="types" collection="types" collection-label="Types" collection-model="filter.document_type_id" item-label="name"></div>
                         <div src-playbook-select id="regionsCustomer" collection="operatingRegions" collection-label="Operating Regions" collection-model="filter.customer_verbose.operating_region_id" item-label="name"></div>
                         <div src-playbook-select id="regionsPlanview" collection="planviewRegions" collection-label="Planview Regions" collection-model="filter.customer_verbose.planview_region_id" item-label="name"></div>
                         <div src-playbook-select id="industries" collection="industries" collection-label="Industries" collection-model="filter.customer_verbose.industry_id" item-label="name"></div>
                         <div src-playbook-select id="customers" collection="customers" collection-label="Customers" collection-model="filter.customer_id" item-label="name"></div>
-                        <div src-playbook-select-multiple id="competitors" collection="competitors" collection-label="Competitors" collection-model="arrayFilter.customer_verbose.competitors" item-label="name"></div>
+                        <div src-playbook-select-multiple id="competitors" collection="competitors" collection-label="Competitors" collection-model="filter.customer_verbose.competitors" item-label="name"></div>
                         <hr>
                         <button type="button" ng-click="resetCategories()" class="btn btn-default btn-block">
                             <span class="text-danger">
@@ -36,9 +36,24 @@
                 </form>
             </div>
             <div class="col-sm-8">
-            <pre ng-bind="filter | json"></pre>
+                <div class="row">
+                    <div class="col-sm-9">
+                        <pagination boundary-links="true" items-per-page="perPage" num-pages="pages" total-items="filteredDocuments().length" ng-model="page" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;" max-size="5"></pagination>
+                    </div>
+                    <div class="col-sm-3 form-group" style="margin-bottom:0;">
+                        <label for="per-page">Results Per Page</label>
+                        <select ng-model="perPage" class="form-control" id="per-page">
+                            <option ng-value="5">5 Results Per Page</option>
+                            <option ng-value="10">10 Results Per Page</option>
+                            <option ng-value="25">25 Results Per Page</option>
+                            <option ng-value="50">50 Results Per Page</option>
+                            <option ng-value="100">100 Results Per Page</option>
+                        </select>
+                    </div>
+                </div>
+                <hr>
                 <div class="panel-group" id="documents">
-                    <div class="panel panel-default" ng-repeat="doc in documents | filter:searchText | playbookSearch:filter | paging:{page: page, perPage: perPage}">
+                    <div class="panel panel-default" ng-repeat="doc in filteredDocuments() | paging:{page: page, perPage: perPage}">
                         <div class="panel-heading">
                             <h4 class="panel-title">
                                 <a data-toggle="collapse" data-parent="#documents" ng-href="#collapse@{{$index}}" ng-bind="doc.title"></a>
@@ -77,6 +92,22 @@
                             <p class="text-center"><a ng-href="@{{doc.url}}" title="" target="_blank" class="btn btn-primary">Get this Document</a></p>
                             </div>
                         </div>
+                    </div>
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col-sm-9">
+                        <pagination boundary-links="true" items-per-page="perPage" num-pages="pages" total-items="filteredDocuments().length" ng-model="page" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;" max-size="5"></pagination>
+                    </div>
+                    <div class="col-sm-3 form-group" style="margin-bottom:0;">
+                        <label for="per-page">Results Per Page</label>
+                        <select ng-model="perPage" class="form-control" id="per-page">
+                            <option ng-value="5">5 Results Per Page</option>
+                            <option ng-value="10">10 Results Per Page</option>
+                            <option ng-value="25">25 Results Per Page</option>
+                            <option ng-value="50">50 Results Per Page</option>
+                            <option ng-value="100">100 Results Per Page</option>
+                        </select>
                     </div>
                 </div>
             </div>

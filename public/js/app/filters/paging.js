@@ -7,8 +7,8 @@ define([
     return angular.module('salesResourceApp.filters.paging', [])
         .filter('paging', function () {
             return function (input, options) {
-                var page = options.page || 1,
-                    perPage = options.perPage || 25,
+                var page = parseInt(options.page) || 1,
+                    perPage = parseInt(options.perPage) || 25,
                     inLength = input.length,
                     lastElem = Math.min((page) * perPage, inLength),
                     numElems = lastElem === inLength ?

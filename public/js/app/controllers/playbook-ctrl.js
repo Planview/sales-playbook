@@ -1,6 +1,7 @@
 define([
     'angular',
     'lodash',
+    '../filters/main',
     '../services/documents',
     '../services/document-types',
     '../services/customers',
@@ -13,6 +14,7 @@ define([
     'use strict';
 
     angular.module('salesResourceApp.controllers.PlaybookCtrl', [
+            'salesResourceApp.filters',
             'salesResourceApp.services.documents',
             'salesResourceApp.services.documentTypes',
             'salesResourceApp.services.customers',
@@ -24,6 +26,7 @@ define([
         ])
         .controller('PlaybookCtrl', [
             '$scope',
+            '$filter',
             'Document',
             'DocumentType',
             'Customer',
@@ -34,6 +37,7 @@ define([
             'PlanviewRegion',
             function (
                     $scope,
+                    $filter,
                     Document,
                     DocumentType,
                     Customer,
@@ -43,6 +47,8 @@ define([
                     OperatingRegion,
                     PlanviewRegion
                 ) {
+                var filteredResults;
+
                 $scope.documents = Document.getList().$object;
                 $scope.types = DocumentType.getList().$object;
                 $scope.operatingRegions = OperatingRegion.getList().$object;
@@ -52,14 +58,24 @@ define([
                 $scope.customers = Customer.getList().$object;
                 $scope.competitors = Competitor.getList().$object;
                 $scope.page = 1;
-                $scope.perPage = 5;
+                $scope.perPage = 25;
                 $scope.filter = {};
-                $scope.filterArray = {};
-                $scope.search = {};
+                $scope.searchText = '';
+
+                $scope.filteredDocuments = function () {
+                    var results;
+                    results = $filter('playbookSearch')($scope.documents, $scope.filter);
+                    results = $filter('filter')(results, $scope.searchText);
+
+                    if (!_.isEqual(results, filteredResults)) {
+                        filteredResults = results;
+                    }
+                    return filteredResults;
+                };
 
                 $scope.resetCategories = function () {
                     $scope.filter = {};
-                    $scope.search = {};
+                    $scope.searchText = '';
                 };
             }
         ]);

@@ -1,5 +1,6 @@
 define([
     'angular',
+    'ui-bootstrap',
     './config',
     './routes',
     './controllers/main',
@@ -13,6 +14,7 @@ define([
         'salesResourceApp.routes',
         'salesResourceApp.controllers',
         'salesResourceApp.directives',
-        'salesResourceApp.filters'
+        'salesResourceApp.filters',
+        'ui.bootstrap'
     ]);
 });

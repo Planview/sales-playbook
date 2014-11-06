@@ -1,6 +1,6 @@
 <div class="form-group">
     <label for="{{id}}">{{collectionLabel}}</label>
-    <select ng-model="collectionModel" ng-options="item[itemLabel] for item in collection" class="form-control" id="{{id}}" fix multiple>
+    <select ng-model="collectionModel" ng-options="item.id as item[itemLabel] for item in collection" class="form-control" id="{{id}}" multiple>
         <option value="">&mdash;Please Select&mdash;</option>
     </select>
 </div>

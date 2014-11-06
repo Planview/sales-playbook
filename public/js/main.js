@@ -5,7 +5,8 @@ require.config({
         'restangular': '../bower_components/restangular/dist/restangular',
         'jquery': '../bower_components/jquery/dist/jquery',
         'lodash': '../bower_components/lodash/dist/lodash',
-        'bootstrap': '../bower_components/bootstrap-sass-official/assets/javascripts/bootstrap'
+        'bootstrap': '../bower_components/bootstrap-sass-official/assets/javascripts/bootstrap',
+        'ui-bootstrap': '../bower_components/angular-ui-bootstrap-bower/ui-bootstrap-tpls'
     },
     shim: {
         'angular': {
@@ -20,6 +21,9 @@ require.config({
         },
         'bootstrap': {
             deps: ['jquery']
+        },
+        'ui-bootstrap': {
+            deps: ['jquery', 'bootstrap', 'angular']
         }
     },
     priority: ['angular']

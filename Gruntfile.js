@@ -4,8 +4,15 @@ module.exports = function (grunt) {
     'use strict';
 
     require('load-grunt-tasks')(grunt);
+    require('time-grunt')(grunt);
+
+    var appConfig = {
+        app: 'public',
+        dist: 'html'
+    };
 
     grunt.initConfig({
+        paths: appConfig,
         sass: {
             dev: {
                 options: {
@@ -15,30 +22,73 @@ module.exports = function (grunt) {
                 },
                 files: [{
                     expand: true,
-                    cwd: 'public/scss',
+                    cwd: '<%= paths.app %>/scss',
                     src: ['*.scss'],
-                    dest: 'public/css',
+                    dest: '<%= paths.app %>/css',
                     ext: '.css'
                 }]
             }
         },
         jshint: {
             options: {
-                jshintrc: true
+                jshintrc: true,
+                reporter: require('jshint-stylish')
             },
-            all: ['Gruntfile.js', 'public/js/**/*.js']
+            all: [
+                'Gruntfile.js',
+                '<%= paths.app %>/js/**/*.js',
+                '!<%= paths.app %>/js/tests/**/*.js'
+            ],
+            test: {
+                options: {
+                    jshintrc: '<%= paths.app %>/js/test/.jshintrc'
+                },
+                src: ['test/spec/{,*/}*.js']
+            }
         },
         watch: {
             scripts: {
-                files: '**/*.js',
-                tasks: ['jshint:all']
+                files: '<%= paths.app %>/js/**/*.js',
+                tasks: ['newer:jshint:all']
             },
             sass: {
                 files: ['**/*.scss', '**/*.sass'],
                 task: ['sass:dev']
             }
-        }
+        },
+        phpunit: {
+            options: {
+                bin: 'vendor/bin/phpunit',
+                configuration: 'phpunit.xml'
+            },
+            app: {
+                dir: 'app/tests'
+            }
+        },
+        clean: {
+            dist: {
+                files: [{
+                    dot: true,
+                    src: [
+                        '.tmp',
+                        '<%= paths.dist %>/{,*/}*',
+                        '!<%= paths.dist %>/.git*'
+                    ]
+                }]
+            },
+            server: '.tmp'
+        },
+        imagemin: {
+            dist: {
+                files: [{
+                    expand: true,
+                    cwd: '<%= paths.app %>/images',
+                    src: '{,*/}*.{png,jpg,jpeg,gif}',
+                    dest: '<%= paths.dist %>/images'
+                }]
+            }
+        },
     });
 
-    grunt.registerTask('default', ['sass:dev', 'jshint:all', 'watch']);
+    grunt.registerTask('default', ['newer:sass:dev', 'newer:jshint:all', 'watch']);
 };

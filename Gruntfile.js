@@ -37,6 +37,15 @@ module.exports = function (grunt) {
                 files: ['**/*.scss', '**/*.sass'],
                 task: ['sass:dev']
             }
+        },
+        phpunit: {
+            options: {
+                bin: 'vendor/bin/phpunit',
+                configuration: 'phpunit.xml'
+            },
+            app: {
+                dir: 'app/tests'
+            }
         }
     });
 

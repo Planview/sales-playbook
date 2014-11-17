@@ -6,7 +6,8 @@ require.config({
         'jquery': '../bower_components/jquery/dist/jquery',
         'lodash': '../bower_components/lodash/dist/lodash',
         'bootstrap': '../bower_components/bootstrap-sass-official/assets/javascripts/bootstrap',
-        'ui-bootstrap': '../bower_components/angular-ui-bootstrap-bower/ui-bootstrap-tpls'
+        'ui-bootstrap': '../bower_components/angular-ui-bootstrap-bower/ui-bootstrap-tpls',
+        'ui-router': '../bower_components/angular-ui-router/release/angular-ui-router'
     },
     shim: {
         'angular': {
@@ -24,6 +25,9 @@ require.config({
         },
         'ui-bootstrap': {
             deps: ['jquery', 'bootstrap', 'angular']
+        },
+        'ui-router': {
+            deps: ['angular']
         }
     },
     priority: ['angular']

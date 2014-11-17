@@ -27,7 +27,7 @@ define([
         .controller('PlaybookCtrl', [
             '$scope',
             '$filter',
-            'Document',
+            'documents',
             'DocumentType',
             'Customer',
             'Competitor',
@@ -38,7 +38,7 @@ define([
             function (
                     $scope,
                     $filter,
-                    Document,
+                    documents,
                     DocumentType,
                     Customer,
                     Competitor,
@@ -49,7 +49,7 @@ define([
                 ) {
                 var filteredResults;
 
-                $scope.documents = Document.getList().$object;
+                $scope.documents = documents;
                 $scope.types = DocumentType.getList().$object;
                 $scope.operatingRegions = OperatingRegion.getList().$object;
                 $scope.planviewRegions = PlanviewRegion.getList().$object;

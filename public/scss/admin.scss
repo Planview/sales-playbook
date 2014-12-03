@@ -1,0 +1,39 @@
+@import "variables";
+$zindex-navmenu-fixed: 1025;
+
+@import "../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap";
+@import "../bower_components/jasny-bootstrap/scss/jasny-bootstrap";
+
+html, body {
+  height: 100%;
+}
+body.admin {
+  padding-top: $navbar-height;
+}
+
+.navmenu {
+  padding-top: $navbar-height;
+}
+.navmenu-toggle {
+  color: #777;
+  float: left;
+  padding: {
+    top: 6px;
+    bottom: 6px;
+  }
+}
+
+@media (max-width: $screen-sm-max) {
+  .navmenu-toggle {
+    display: block !important;
+  }
+  .navmenu {
+    padding-top: 0;
+  }
+}
+
+@media (min-width: 992px) {
+  body.admin {
+    padding-left: $navmenu-width;
+  }
+}

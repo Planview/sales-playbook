@@ -14,7 +14,7 @@ class PlanviewRegionsController extends \BaseController {
      */
     public function index()
     {
-        return Response::json(PlanviewRegion::with('planviewSubRegions')->get());
+        return Response::json(PlanviewRegion::orderBy('name')->with('planviewSubRegions')->get());
     }
 
 

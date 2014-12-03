@@ -14,7 +14,7 @@ class IndustriesController extends \BaseController {
      */
     public function index()
     {
-        return Response::json(Industry::all());
+        return Response::json(Industry::orderBy('name')->get());
     }
 
 

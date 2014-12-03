@@ -14,7 +14,7 @@ class OperatingRegionsController extends \BaseController {
      */
     public function index()
     {
-        return Response::json(OperatingRegion::all());
+        return Response::json(OperatingRegion::orderBy('name')->get());
     }
 
 

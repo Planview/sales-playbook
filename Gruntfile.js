@@ -54,6 +54,16 @@ module.exports = function (grunt) {
             sass: {
                 files: ['**/*.scss', '**/*.sass'],
                 task: ['sass:dev']
+            },
+            livereload: {
+                options: {
+                    livereload: true
+                },
+                files: [
+                    'views/**/*.php',
+                    'public/css/*.css',
+                    'public/js/**/*.js'
+                ]
             }
         },
         phpunit: {

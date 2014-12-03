@@ -14,7 +14,7 @@ class CompetitorsController extends \BaseController {
      */
     public function index()
     {
-        return Response::json(Competitor::all());
+        return Response::json(Competitor::orderBy('name')->get());
     }
 
 

@@ -14,7 +14,7 @@ class DocumentTypesController extends \BaseController {
      */
     public function index()
     {
-        return Response::json(DocumentType::all());
+        return Response::json(DocumentType::orderBy('name')->get());
     }
 
 

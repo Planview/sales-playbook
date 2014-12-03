@@ -14,7 +14,7 @@ class DocumentsController extends \BaseController {
      */
     public function index()
     {
-        return Response::json(Document::with(
+        return Response::json(Document::orderby('title')->with(
             'customerVerbose',
             'documentType'
         )->get());

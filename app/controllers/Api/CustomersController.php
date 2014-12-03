@@ -14,7 +14,7 @@ class CustomersController extends \BaseController {
      */
     public function index()
     {
-        return Response::json(Customer::all());
+        return Response::json(Customer::orderBy('name')->get());
     }
 
 

@@ -14,7 +14,7 @@ class MarketsController extends \BaseController {
      */
     public function index()
     {
-        return Response::json(Market::all());
+        return Response::json(Market::orderBy('name')->get());
     }
 
 

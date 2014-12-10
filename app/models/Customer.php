@@ -1,12 +1,23 @@
 <?php
 
-class Customer extends \Eloquent {
-	protected $fillable = [
+use LaravelBook\Ardent\Ardent;
+
+class Customer extends Ardent
+{
+    protected $fillable = [
         'name',
         'can_use_name',
         'planview_sub_region_id',
         'operating_region_id',
         'industry_id'
+    ];
+
+    public static $rules = [
+        'name'                  => 'required|between:2,80',
+        'can_use_name'          => 'required|boolean',
+        'planview_sub_region_id'    => 'exists:planview_sub_regions,id',
+        'operating_region_id'   => 'exists:operating_regions,id',
+        'industry_id'           => 'exists:industries,id',
     ];
 
     public function documents()

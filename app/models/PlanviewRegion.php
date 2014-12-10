@@ -1,7 +1,14 @@
 <?php
 
-class PlanviewRegion extends \Eloquent {
+use LaravelBook\Ardent\Ardent;
+
+class PlanviewRegion extends Ardent
+{
     protected $fillable = ['name'];
+
+    public static $rules = [
+        'name'  => 'required|between:2,80'
+    ];
 
     public function planviewSubRegions()
     {

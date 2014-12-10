@@ -1,7 +1,14 @@
 <?php
 
-class Market extends \Eloquent {
+use LaravelBook\Ardent\Ardent;
+
+class Market extends Ardent
+{
 	protected $fillable = ['name'];
+
+    public static $rules = [
+        'name'  => 'required|between:2,80'
+    ];
 
     public function customers()
     {

@@ -1,7 +1,14 @@
 <?php
 
-class Competitor extends \Eloquent {
-	protected $fillable = ['name'];
+use LaravelBook\Ardent\Ardent;
+
+class Competitor extends Ardent
+{
+    protected $fillable = ['name'];
+
+    public static $rules = [
+        'name'  => 'required|between:2,80'
+    ];
 
     public function customers()
     {

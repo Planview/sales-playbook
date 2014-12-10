@@ -18,7 +18,8 @@ module.exports = function (grunt) {
                 options: {
                     unixNewlines: true,
                     sourcemap: 'auto',
-                    style: 'nested'
+                    style: 'nested',
+                    loadPath: 'public/bower_components'
                 },
                 files: [{
                     expand: true,

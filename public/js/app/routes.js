@@ -15,7 +15,8 @@ define([
             function ($rootScope, $state, $stateParams) {
                 $rootScope.$state = $state;
                 $rootScope.$stateParams = $stateParams;
-            }])
+            }
+        ])
         .config(['$stateProvider', '$urlRouterProvider',
             function ($stateProvider, $urlRouterProvider) {
                 $stateProvider.state('home', {
@@ -29,5 +30,6 @@ define([
                     }
                 });
                 $urlRouterProvider.otherwise('/');
-            }]);
+            }
+        ]);
 });

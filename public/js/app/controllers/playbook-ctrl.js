@@ -36,17 +36,17 @@ define([
             'OperatingRegion',
             'PlanviewRegion',
             function (
-                    $scope,
-                    $filter,
-                    documents,
-                    DocumentType,
-                    Customer,
-                    Competitor,
-                    Industry,
-                    Market,
-                    OperatingRegion,
-                    PlanviewRegion
-                ) {
+                $scope,
+                $filter,
+                documents,
+                DocumentType,
+                Customer,
+                Competitor,
+                Industry,
+                Market,
+                OperatingRegion,
+                PlanviewRegion
+            ) {
                 var filteredResults;
 
                 $scope.documents = documents;

@@ -2,16 +2,40 @@
 
 use LaravelBook\Ardent\Ardent;
 
+/**
+ * Planview markets
+ */
 class Market extends Ardent
 {
-	protected $fillable = ['name'];
 
+    /**
+     * Only allow mass assignment of the name
+     *
+     * @access  protected
+     * @var     array   $fillable
+     */
+    protected $fillable = ['name'];
+
+    /**
+     * Ardent validation rules
+     *
+     * @access  public
+     * @static
+     * @var     array   $rules
+     */
     public static $rules = [
         'name'  => 'required|between:2,80'
     ];
 
-    public function customers()
-    {
-        return $this->belongsToMany('Customer');
-    }
+    /**
+     * Set up relationships through Ardent
+     *
+     * @access  public
+     * @static
+     * @var     array   $relationsData
+     */
+    public static $relationsData = [
+        'customers' => [self::BELONGS_TO_MANY, 'Customer']
+    ];
+
 }

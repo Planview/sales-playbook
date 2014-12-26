@@ -27,6 +27,7 @@
     "angular-ui-router": "~0.2.11",
     "angular-ui-bootstrap-bower": "~0.11.2",
     "jasny-bootstrap": "master",
-    "font-awesome": "~4.2.0"
+    "font-awesome": "~4.2.0",
+    "codemirror": "~4.9.0"
   }
 }

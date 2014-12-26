@@ -40,7 +40,7 @@ Route::group(
     [
         'prefix'    => 'admin',
         'namespace' => 'Admin',
-        'before'    => 'auth'
+        'before'    => ['auth', 'admin']
     ], function() {
     Route::get('/', ['as' => 'admin.dashboard', 'uses' => 'HomeController@showDashboard']);
     Route::resource('documents', 'DocumentsController', ['except' => ['edit']]);

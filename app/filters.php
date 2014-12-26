@@ -88,3 +88,17 @@ Route::filter('csrf', function()
         throw new Illuminate\Session\TokenMismatchException;
     }
 });
+
+Route::filter('can', function ($route, $request, $permission)
+{
+    if (!Entrust::can($permission)) {
+        return Redirect::to('/');
+    }
+});
+
+Route::filter('admin', function ()
+{
+    if (!Entrust::can('view_admin')) {
+        return Redirect::to('/');
+    }
+});

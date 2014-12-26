@@ -5,7 +5,7 @@
     <title>@yield('title')</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width">
-    {{ HTML::style('css/admin.css'); }}
+    {{ HTML::style('css/admin.css') }}
   </head>
   <body class="admin">
 
@@ -23,6 +23,9 @@
     <div class="container-fluid">
       @yield('content')
     </div><!-- /.container -->
+    @if (Session::has('message'))
+      {{ Alert::info(Session::get('message'))->close()->fixed('bottom') }}
+    @endif
     {{ HTML::script('bower_components/requirejs/require.js', ['data-main' => '/js/admin']) }}
   </body>
 </html>

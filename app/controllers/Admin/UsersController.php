@@ -5,6 +5,11 @@ namespace Admin;
 use Response;
 use Redirect;
 use View;
+use App;
+use Input;
+use Config;
+use Mail;
+use Lang;
 
 use User;
 use Role;
@@ -48,7 +53,8 @@ class UsersController extends \BaseController
             'title'     => 'Create a New User',
             'action'    => 'admin.users.store',
             'user'      => $user,
-            'roles'     => $roles
+            'roles'     => $roles,
+            'method'    => 'post'
         ]);
     }
 
@@ -60,10 +66,41 @@ class UsersController extends \BaseController
      */
     public function store()
     {
-        //
-        return Redirect::route('admin.users.create')
-            ->withInput()
-            ->withMessage("You're pretty");
+        $repo = App::make('UserRepository');
+        $user = $repo->signup(Input::all());
+
+        if ($user->id) {
+            if (Input::has('roles')) {
+                $user->roles()->sync(Input::get('roles'));
+            }
+
+            if (null === Input::get('auto_confirm') && Config::get('confide::signup_email')) {
+                Mail::queueOn(
+                    Config::get('confide::email_queue'),
+                    Config::get('confide::email_account_confirmation'),
+                    compact('user'),
+                    function ($message) use ($user) {
+                        $message
+                            ->to($user->email, $user->username)
+                            ->subject(Lang::get('confide::confide.email.account_confirmation.subject'));
+                    }
+                );
+            } else {
+                $user->confirm();
+            }
+
+            return Redirect::action('admin.users.show', $user->id)
+                ->with('message', "The user {$user->username} was successfully created");
+        } else {
+            \Log::info($user->errors());
+            $error = $user->errors()->all(':message');
+
+            return Redirect::route('admin.users.create')
+                ->withInput(Input::except('password'))
+                ->withError('There was a problem with your submission. ' .
+                    'See below for more information')
+                ->with('form_errors', $user->errors());
+        }
     }
 
 
@@ -80,9 +117,10 @@ class UsersController extends \BaseController
 
         return View::make('admin.users.form')->with([
             'title'     => "Update User: {$user->username}",
-            'action'    => 'admin.users.update',
+            'action'    => ['admin.users.update', $user->id],
             'user'      => $user,
-            'roles'     => $roles
+            'roles'     => $roles,
+            'method'    => 'put'
         ]);
     }
 
@@ -93,9 +131,11 @@ class UsersController extends \BaseController
      * @param  int  $id
      * @return Response
      */
-    public function update($id)
+    public function update($user)
     {
-        //
+        return Redirect::route('admin.users.show', $user->id)
+            ->withInput()
+            ->withMessage("You're pretty");
     }
 
 
@@ -105,9 +145,13 @@ class UsersController extends \BaseController
      * @param  int  $id
      * @return Response
      */
-    public function destroy($id)
+    public function destroy($user)
     {
-        //
+        $username = $user->username;
+        $user->delete();
+
+        return Redirect::route('admin.users.index')
+            ->withMessage("The user $username has been deleted.");
     }
 
 }

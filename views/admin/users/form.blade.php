@@ -1,33 +1,59 @@
 @extends('admin.layout')
 
 @section('title')
-Create a New User
+{{ $title }}
 @stop
 
 @section('content')
     <header class="page-header">
-        <h1>Create a New User</h1>
+        <h1>{{ $title }}</h1>
     </header>
-    {{ Form::horizontal(['route' => 'admin.users.store', 'class' => 'row']) }}
+    {{ Form::horizontal(['route' => $action, 'class' => 'row', 'method' => $method]) }}
         <div class="col-sm-9">
-            {{ ControlGroup::generate(
-                Form::label('username', 'Username'),
-                Form::text('username', Input::old('username') ?: $user->username),
-                null,
-                3
-            ) }}
-            {{ ControlGroup::generate(
-                Form::label('email', 'Email'),
-                Form::email('email', Input::old('email') ?: $user->email),
-                null,
-                3
-            ) }}
-            {{ ControlGroup::generate(
-                Form::label('roles', 'Roles'),
-                Form::select('roles', $roles, Input::old('roles') ?: $user->roles, ['multiple' => 'multiple']),
-                null,
-                3
-            ) }}
+            <fieldset>
+                <legend>General Info</legend>
+                {{ ControlGroup::generate(
+                    Form::label('username', 'Username'),
+                    Form::text('username', Input::old('username') ?: $user->username, ['required']),
+                    null,
+                    3
+                ) }}
+                {{ ControlGroup::generate(
+                    Form::label('email', 'Email'),
+                    Form::email('email', Input::old('email') ?: $user->email, ['required']),
+                    null,
+                    3
+                ) }}
+                {{ ControlGroup::generate(
+                    Form::label('roles', 'Roles'),
+                    Form::select('roles', $roles, Input::old('roles') ?: $user->rolesById(), ['multiple', 'name' => 'roles[]']),
+                    null,
+                    3
+                ) }}
+            </fieldset>
+            <fieldset>
+                <legend>Authentication</legend>
+                {{ ControlGroup::generate(
+                    Form::label('password', 'New Password'),
+                    Form::password('password'),
+                    null,
+                    3
+                ) }}
+                {{ ControlGroup::generate(
+                    Form::label('password_confirmation', 'Confirm New Password'),
+                    Form::password('password_confirmation'),
+                    null,
+                    3
+                ) }}
+                @if (null === $user->id)
+                    {{ ControlGroup::generate(
+                        Form::label('auto_confirm', 'Auto-confirm User'),
+                        '<div class="checkbox"><label>' . Form::checkbox('auto_confirm', 1, Input::old('auto_confirm')) . ' Do not send confirmation</label></div>',
+                        Form::help('Use this if the user should not receive a confirmation email'),
+                        3
+                    ) }}
+                @endif
+            </fieldset>
         </div>
         <div class="col-sm-3">
             <div class="well">

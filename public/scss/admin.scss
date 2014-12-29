@@ -42,3 +42,7 @@ body.admin {
 .form-button {
   display: inline;
 }
+
+.alert-fixed-top {
+  top: $navbar-height;
+}

@@ -18,10 +18,13 @@ All Users
                 <li class="list-group-item">
                     <h4 class="list-group-item-heading">{{ $user->username }} <small>{{ $user->email }}</small></h4>
                     {{ Button::primary('Edit')->asLinkTo(route('admin.users.show', ['id' => $user->id])) }}
-                    {{ Form::inline(['route' => 'admin.users.destroy', 'id' => $user->id, 'class' => 'form-button']) }}
+                    {{ Form::inline([
+                        'route' => ['admin.users.destroy', $user->id],
+                        'class' => 'form-button',
+                        'method'    => 'delete'
+                    ]) }}
                         {{ Button::danger('Delete')->submit() }}
                     {{ Form::close() }}
-                    {{ var_dump($user->roles) }}
                 </li>
             @endforeach
         </ul>

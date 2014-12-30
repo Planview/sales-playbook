@@ -29,7 +29,7 @@ All Users
             @endforeach
         </ul>
     @else
-
+        <p class="lead">No Users Found</p>
     @endif
 
     {{ $users->links() }}

@@ -10,11 +10,7 @@ use Role;
 
 class RolesController extends \BaseController {
 
-    public function __construct()
-    {
-        $this->beforeFilter('can:manage_roles');
-        $this->beforeFilter('csrf', ['on' => ['post', 'put', 'delete']]);
-    }
+    protected $permission = 'manage_roles';
 
     /**
      * Display a listing of the resource.

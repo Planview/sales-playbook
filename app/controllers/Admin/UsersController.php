@@ -17,13 +17,7 @@ use Role;
 class UsersController extends \BaseController
 {
 
-    /**
-     * Constructor, applies filters
-     */
-    public function __construct() {
-        $this->beforeFilter('can:manage_users');
-        $this->beforeFilter('csrf', ['on' => ['post', 'put', 'delete']]);
-    }
+    protected $permission = 'manage_users';
 
     /**
      * Display a listing of the resource.

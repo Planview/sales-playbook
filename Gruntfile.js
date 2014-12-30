@@ -53,15 +53,15 @@ module.exports = function (grunt) {
                 tasks: ['newer:jshint:all']
             },
             sass: {
-                files: ['**/*.scss', '**/*.sass'],
-                task: ['sass:dev']
+                files: '<%= paths.app %>/scss/**/*.scss',
+                tasks: ['sass:dev']
             },
             livereload: {
                 options: {
                     livereload: true
                 },
                 files: [
-                    'views/**/*.php',
+                    '**/*.php',
                     'public/css/*.css',
                     'public/js/**/*.js'
                 ]
@@ -101,5 +101,5 @@ module.exports = function (grunt) {
         },
     });
 
-    grunt.registerTask('default', ['newer:sass:dev', 'newer:jshint:all', 'watch']);
+    grunt.registerTask('default', ['sass:dev', 'newer:jshint:all', 'watch']);
 };

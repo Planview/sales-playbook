@@ -19,6 +19,7 @@
     </div><!-- /.container -->
 
     @section('scripts')
+      {{ livereload() }}
       {{ HTML::script('bower_components/requirejs/require.js', ['data-main' => '/js/admin']) }}
     @show
   </body>

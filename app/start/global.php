@@ -82,3 +82,5 @@ App::down(function()
 require app_path().'/filters.php';
 
 require app_path().'/composers.php';
+
+require app_path().'/helpers.php';

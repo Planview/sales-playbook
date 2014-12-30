@@ -99,7 +99,7 @@ class UsersController extends \BaseController
                 ->withInput(Input::except('password'))
                 ->withError('There was a problem with your submission. ' .
                     'See below for more information')
-                ->with('form_errors', $user->errors());
+                ->withErrors($user->errors());
         }
     }
 
@@ -133,9 +133,31 @@ class UsersController extends \BaseController
      */
     public function update($user)
     {
-        return Redirect::route('admin.users.show', $user->id)
-            ->withInput()
-            ->withMessage("You're pretty");
+        if (Input::has('email')) {
+            $user->email = Input::get('email');
+        }
+
+        if (Input::has('password')) {
+            $user->password = Input::get('password');
+            $user->password_confirmation = Input::get('password_confirmation');
+        }
+
+        if (Input::has('roles')) {
+            $user->roles()->sync(Input::get('roles'));
+        }
+
+        $result = $user->save();
+
+        if ($result) {
+            return Redirect::route('admin.users.show', $user->id)
+                ->withMessage('The user has been updated');
+        } else {
+            return Redirect::route('admin.users.show', $user->id)
+                ->withInput(Input::except('password'))
+                ->withError('There was a problem with your submission. ' .
+                    'See below for more information')
+                ->withErrors($user->errors());
+        }
     }
 
 

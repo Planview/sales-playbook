@@ -12,15 +12,25 @@
         <div class="col-sm-9">
             <fieldset>
                 <legend>General Info</legend>
-                {{ ControlGroup::generate(
-                    Form::label('username', 'Username'),
-                    Form::text('username', Input::old('username') ?: $user->username, ['required']),
-                    null,
-                    3
-                ) }}
+                @if (null === $user->id)
+                    {{-- Test if we're creating a new user --}}
+                    {{ ControlGroup::generate(
+                        Form::label('username', 'Username'),
+                        Form::text('username', Input::old('username'), ['required']) . $errors->first('username', '<span class="label label-danger">:message</span>'),
+                        null,
+                        3
+                    ) }}
+                @else
+                    {{ ControlGroup::generate(
+                        Form::label('username', 'Username'),
+                        Form::text('username', $user->username, ['disabled']),
+                        null,
+                        3
+                    ) }}
+                @endif
                 {{ ControlGroup::generate(
                     Form::label('email', 'Email'),
-                    Form::email('email', Input::old('email') ?: $user->email, ['required']),
+                    Form::email('email', Input::old('email') ?: $user->email, ['required']) . $errors->first('email', '<span class="label label-danger">:message</span>'),
                     null,
                     3
                 ) }}
@@ -35,13 +45,13 @@
                 <legend>Authentication</legend>
                 {{ ControlGroup::generate(
                     Form::label('password', 'New Password'),
-                    Form::password('password'),
+                    Form::password('password') . $errors->first('password', '<span class="label label-danger">:message</span>'),
                     null,
                     3
                 ) }}
                 {{ ControlGroup::generate(
                     Form::label('password_confirmation', 'Confirm New Password'),
-                    Form::password('password_confirmation'),
+                    Form::password('password_confirmation') . $errors->first('password_confirmation', '<span class="label label-danger">:message</span>'),
                     null,
                     3
                 ) }}

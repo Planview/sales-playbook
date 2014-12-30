@@ -54,8 +54,10 @@ Route::group(
     Route::resource('planview-subregions', 'PlanviewSubRegionsController', ['except' => ['edit']]);
     Route::resource('users', 'UsersController', ['except' => ['edit']]);
     Route::resource('roles', 'RolesController', ['except' => ['edit']]);
+    Route::resource('permissions', 'PermissionsController', ['except' => ['edit']]);
     Route::model('users', 'User');
     Route::model('roles', 'Role');
+    Route::model('permissions', 'Permission');
 });
 
 Route::group(['prefix' => 'auth'], function ()

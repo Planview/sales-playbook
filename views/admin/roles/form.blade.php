@@ -17,6 +17,12 @@
                 null,
                 3
             ) }}
+            {{ ControlGroup::generate(
+                Form::label('permissions', 'Permissions'),
+                Form::select('permissions', $permissions, Input::old('permissions') ?: $role->permissionsById(), ['multiple', 'name' => 'permissions[]']),
+                null,
+                3
+            ) }}
         </div>
         <div class="col-sm-3">
             <div class="well">

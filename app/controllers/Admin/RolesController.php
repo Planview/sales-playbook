@@ -7,6 +7,7 @@ use Redirect;
 use Input;
 
 use Role;
+use Permission;
 
 class RolesController extends \BaseController {
 
@@ -37,6 +38,7 @@ class RolesController extends \BaseController {
             ->with('title', 'Create a New Role')
             ->with('action', 'admin.roles.store')
             ->with('method', 'post')
+            ->with('permissions', Permission::optionsList())
             ->with('role', new Role());
     }
 
@@ -53,6 +55,8 @@ class RolesController extends \BaseController {
         $role->name = Input::get('name');
 
         if ($role->save()) {
+            $role->perms()->sync(Input::get('permissions'));
+
             return Redirect::route('admin.roles.show', $role->id)
                 ->withMessage('The role has been created');
         } else {
@@ -75,6 +79,7 @@ class RolesController extends \BaseController {
             ->with('title', 'Edit Role: ' . $role->name)
             ->with('action', ['admin.roles.update', $role->id])
             ->with('method', 'put')
+            ->with('permissions', Permission::optionsList())
             ->with('role', $role);
     }
 
@@ -88,6 +93,8 @@ class RolesController extends \BaseController {
     public function update($role)
     {
         $role->name = Input::get('name');
+
+        $role->perms()->sync(Input::get('permissions'));
 
         if ($role->save()) {
             return Redirect::route('admin.roles.show', $role->id)

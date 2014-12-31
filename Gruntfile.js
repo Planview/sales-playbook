@@ -62,6 +62,7 @@ module.exports = function (grunt) {
                 },
                 files: [
                     '**/*.php',
+                    '!vendor/**/*.php',
                     'public/css/*.css',
                     'public/js/**/*.js'
                 ]

@@ -20,4 +20,18 @@ class Permission extends EntrustPermission
         return $options;
     }
 
+    /**
+     * Get an array of all a permissions roles, just the id
+     * @return array The id's of all the roles associated to a permission
+     */
+    public function rolesById()
+    {
+        $rolesById = array();
+
+        foreach ($this->roles as $role) {
+            $rolesById[] = $role->id;
+        }
+
+        return $rolesById;
+    }
 }

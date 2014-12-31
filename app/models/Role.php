@@ -5,6 +5,10 @@ use Zizaco\Entrust\EntrustRole;
 class Role extends EntrustRole
 {
 
+    /**
+     * Make a list for options in a select
+     * @return array All roles keyed as id => name
+     */
     public static function optionsList()
     {
         $list = array();

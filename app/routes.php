@@ -65,6 +65,7 @@ Route::group(
     Route::model('industries', 'Industry');
     Route::model('markets', 'Market');
     Route::model('operating-regions', 'OperatingRegion');
+    Route::model('planview-regions', 'PlanviewRegion');
 });
 
 Route::group(['prefix' => 'auth'], function ()

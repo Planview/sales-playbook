@@ -63,6 +63,7 @@ Route::group(
     Route::model('competitors', 'Competitor');
     Route::model('document-types', 'DocumentType');
     Route::model('industries', 'Industry');
+    Route::model('markets', 'Market');
 });
 
 Route::group(['prefix' => 'auth'], function ()

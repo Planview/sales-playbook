@@ -64,6 +64,7 @@ Route::group(
     Route::model('document-types', 'DocumentType');
     Route::model('industries', 'Industry');
     Route::model('markets', 'Market');
+    Route::model('operating-regions', 'OperatingRegion');
 });
 
 Route::group(['prefix' => 'auth'], function ()

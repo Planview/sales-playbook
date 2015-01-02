@@ -61,6 +61,7 @@ Route::group(
     Route::model('roles', 'Role');
     Route::model('permissions', 'Permission');
     Route::model('competitors', 'Competitor');
+    Route::model('document-types', 'DocumentType');
 });
 
 Route::group(['prefix' => 'auth'], function ()

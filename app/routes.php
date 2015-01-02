@@ -55,9 +55,12 @@ Route::group(
     Route::resource('users', 'UsersController', ['except' => ['edit']]);
     Route::resource('roles', 'RolesController', ['except' => ['edit']]);
     Route::resource('permissions', 'PermissionsController', ['except' => ['edit']]);
+
+    // Route model binding
     Route::model('users', 'User');
     Route::model('roles', 'Role');
     Route::model('permissions', 'Permission');
+    Route::model('competitors', 'Competitor');
 });
 
 Route::group(['prefix' => 'auth'], function ()

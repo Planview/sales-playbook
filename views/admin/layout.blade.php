@@ -14,9 +14,9 @@
     @include('admin.partials.navbar')
     @include('admin.partials.sidebar')
 
-    <div class="container-fluid">
+    <main class="container-fluid">
       @yield('content')
-    </div><!-- /.container -->
+    </main><!-- /.container -->
 
     @section('scripts')
       {{ livereload() }}

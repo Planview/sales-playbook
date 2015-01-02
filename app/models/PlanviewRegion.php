@@ -50,4 +50,22 @@ class PlanviewRegion extends Ardent
         return $this->hasManyThrough('Customer', 'PlanviewSubRegion');
     }
 
+    /**
+     * Build an options list for a select box
+     *
+     * @access  public
+     * @static
+     * @return  array   All objects as id => name
+     */
+    public static function optionsList()
+    {
+        $list = array();
+
+        foreach (self::all() as $region) {
+            $list[$region->id] = $region->name;
+        }
+
+        return $list;
+    }
+
 }

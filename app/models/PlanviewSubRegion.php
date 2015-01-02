@@ -15,7 +15,7 @@ class PlanviewSubRegion extends Ardent
      * @access  protected
      * @var     array   $fillable
      */
-    protected $fillable = ['name'];
+    protected $fillable = ['name', 'planview_region_id'];
 
     /**
      * Ardent validation rules
@@ -26,7 +26,7 @@ class PlanviewSubRegion extends Ardent
      */
     public static $rules = [
         'name'                  => 'required|between:2,80',
-        'planview_region_id'    => 'exists:planview_regions,id'
+        'planview_region_id'    => 'required|exists:planview_regions,id'
     ];
 
     /**

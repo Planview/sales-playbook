@@ -38,4 +38,20 @@ class Market extends Ardent
         'customers' => [self::BELONGS_TO_MANY, 'Customer']
     ];
 
+    /**
+     * Return an array to be used as options in a select
+     *
+     * @return array Items as id => name
+     */
+    public static function optionsList()
+    {
+        $list = array();
+
+        foreach (self::all() as $market) {
+            $list[$market->id] = $market->name;
+        }
+
+        return $list;
+    }
+
 }

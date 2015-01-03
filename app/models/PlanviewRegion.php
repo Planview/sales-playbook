@@ -68,4 +68,26 @@ class PlanviewRegion extends Ardent
         return $list;
     }
 
+    /**
+     * Setup a full list of subregions categorized by region
+     *
+     * @return  array   Nested array of subregions
+     */
+    public static function optionsListSubregions()
+    {
+        $list = array();
+
+        foreach (self::all() as $region) {
+            $subList = array();
+
+            foreach ($region->planviewSubRegions as $subregion) {
+                $subList[$subregion->id] = $subregion->name;
+            }
+
+            $list[$region->name] = $subList;
+        }
+
+        return $list;
+    }
+
 }

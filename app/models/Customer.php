@@ -61,4 +61,38 @@ class Customer extends Ardent
         return $this->planviewSubRegion()->with('planviewRegion');
     }
 
+    /**
+     * Get the ID's of all the markets
+     * @return  array   All the ID's
+     */
+    public function marketsById()
+    {
+        return $this->relatedById('markets');
+    }
+
+    /**
+     * Get the ID's of all the competitors
+     * @return  array   All the ID's
+     */
+    public function competitorsById()
+    {
+        return $this->relatedById('competitors');
+    }
+
+    /**
+     * Abstract getting the ID's of related objects
+     * @param   string  $name   The property to iterate over
+     * @return  array           All the item ID's in an array
+     */
+    protected function relatedById($name)
+    {
+        $list = array();
+
+        foreach ($this->$name as $item) {
+            $list[] = $item->id;
+        }
+
+        return $list;
+    }
+
 }

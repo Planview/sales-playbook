@@ -38,4 +38,20 @@ class Industry extends Ardent
         'customers' => [self::HAS_MANY, 'Customer']
     ];
 
+    /**
+     * Return an array to be used as options in a select
+     *
+     * @return array Items as id => name
+     */
+    public static function optionsList()
+    {
+        $list = array();
+
+        foreach (self::all() as $industry) {
+            $list[$industry->id] = $industry->name;
+        }
+
+        return $list;
+    }
+
 }

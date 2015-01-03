@@ -16,7 +16,10 @@ class Customer extends Ardent
      */
     protected $fillable = [
         'name',
-        'can_use_name'
+        'can_use_name',
+        'planview_sub_region_id',
+        'operating_region_id',
+        'industry_id'
     ];
 
     /**
@@ -59,6 +62,29 @@ class Customer extends Ardent
     public function planviewSubRegionVerbose()
     {
         return $this->planviewSubRegion()->with('planviewRegion');
+    }
+
+    /**
+     * Clean up relationship data on delete
+     *
+     * @param   Customer    $customer   The object being deleted
+     * @return  boolean                 Returns true
+     */
+    public function beforeDelete($customer)
+    {
+        foreach ($customer->documents as $document) {
+            $document->delete();
+        }
+
+        DB::table('competitor_customer')
+            ->where('customer_id', $customer->id)
+            ->delete();
+
+        DB::table('customer_market')
+            ->where('customer_id', $customer->id)
+            ->delete();
+
+        return true;
     }
 
     /**

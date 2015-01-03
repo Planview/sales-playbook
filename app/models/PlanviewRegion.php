@@ -90,4 +90,18 @@ class PlanviewRegion extends Ardent
         return $list;
     }
 
+    /**
+     * Hook before delete, deletes subregions
+     *
+     * @param  PlanviewRegion   $region     The region being deleted
+     * @return boolean          Return true for continued process
+     */
+    public function beforeDelete($region)
+    {
+        foreach ($region->planviewSubRegions as $subregion) {
+            $subregion->delete();
+        }
+
+        return true;
+    }
 }

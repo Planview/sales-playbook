@@ -42,4 +42,18 @@ class DocumentType extends Ardent
         'documents' => [self::HAS_MANY, 'Document']
     ];
 
+    /**
+     * Clean up relationships on delete
+     *
+     * @param   DocumentType    $type   The object being deleted
+     * @return  boolean         Returns true
+     */
+    public function beforeDelete($type)
+    {
+        foreach ($type->documents as $document) {
+            $document->delete();
+        }
+
+        return true;
+    }
 }

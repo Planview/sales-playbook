@@ -54,4 +54,19 @@ class Competitor extends Ardent
         return $list;
     }
 
+    /**
+     * Hook into delete to clean up relationships
+     *
+     * @param  Competitor   $competitor     The object being deleted
+     * @return boolean      Returns true
+     */
+    public function beforeDelete($competitor)
+    {
+        DB::table('competitor_customer')
+            ->where('competitor_id', $competitor->id)
+            ->delete();
+
+        return true;
+    }
+
 }

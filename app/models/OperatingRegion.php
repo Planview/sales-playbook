@@ -54,4 +54,18 @@ class OperatingRegion extends Ardent
         return $list;
     }
 
+    /**
+     * Handle cascading delete
+     *
+     * @return boolean Returns true
+     */
+    public function beforeDelete()
+    {
+        foreach ($this->customers as $customer) {
+            $customer->delete();
+        }
+
+        return true;
+    }
+
 }

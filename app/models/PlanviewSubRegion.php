@@ -41,4 +41,18 @@ class PlanviewSubRegion extends Ardent
         'customers'         => [self::HAS_MANY, 'Customer']
     ];
 
+    /**
+     * Hook into delete to delete customers as well
+     * @param  PlanviewSubRegion    $subregion  The object being deleted
+     * @return boolean              Return true
+     */
+    public function beforeDelete($subregion)
+    {
+        foreach ($subregion->customers as $customer) {
+            $customer->delete();
+        }
+
+        return true;
+    }
+
 }

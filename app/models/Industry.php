@@ -54,4 +54,18 @@ class Industry extends Ardent
         return $list;
     }
 
+    /**
+     * Clean up relationships on delete
+     *
+     * @return  boolean     Returns true
+     */
+    public function beforeDelete()
+    {
+        foreach ($this->customers as $customer) {
+            $customer->delete();
+        }
+
+        return true;
+    }
+
 }

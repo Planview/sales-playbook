@@ -54,4 +54,19 @@ class Market extends Ardent
         return $list;
     }
 
+    /**
+     * Clean up relationship data on delete
+     *
+     * @param   Market  $market     The object being deleted
+     * @return  boolean             Returns true
+     */
+    public function beforeSave($market)
+    {
+        DB::table('customer_market')
+            ->where('market_id', $market->id)
+            ->delete();
+
+        return true;
+    }
+
 }

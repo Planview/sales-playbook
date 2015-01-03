@@ -9,7 +9,10 @@ use \Input;
 
 use \OperatingRegion;
 
-class OperatingRegionsController extends \BaseController {
+class OperatingRegionsController extends \BaseController
+{
+
+    protected $permission = 'manage_playbook_meta';
 
     /**
      * Display a listing of the resource.

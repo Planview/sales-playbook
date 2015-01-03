@@ -24,6 +24,14 @@ class PermissionsTableSeeder extends Seeder {
             'name'  => 'manage_roles',
             'display_name'  => 'Create and Manage Roles'
         ]);
+        Permission::create([
+            'name'  => 'manage_playbook_meta',
+            'display_name'  => 'Manage Meta Categories for the Playbook'
+        ]);
+        Permission::create([
+            'name'  => 'manage_playbook',
+            'display_name'  => 'Manage Playbook Data'
+        ]);
     }
 
 }

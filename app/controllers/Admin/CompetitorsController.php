@@ -9,7 +9,8 @@ use \Input;
 
 use \Competitor;
 
-class CompetitorsController extends \BaseController {
+class CompetitorsController extends \BaseController
+{
 
     protected $permission = 'manage_playbook_meta';
 

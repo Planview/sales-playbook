@@ -4,18 +4,21 @@ class AdminComposer
 {
     /**
      * Holds the built-up menu
+     *
      * @var array
      */
     protected $menuItems;
 
     /**
      * Whether to use autorouting
+     *
      * @var array
      */
     protected $auto;
 
     /**
      * Holds the name of the current route
+     *
      * @var string
      */
     protected $current;
@@ -34,10 +37,12 @@ class AdminComposer
             'link' => URL::route('admin.dashboard')
         ];
         $this->doUserItems();
+        $this->doPlaybookMetaItems();
     }
 
     /**
      * Returns the result of the composer
+     *
      * @param   View    $view   The attached view
      * @return  View    The result of the composer
      */
@@ -50,6 +55,7 @@ class AdminComposer
 
     /**
      * Build the Users submenu
+     *
      * @return void
      */
     protected function doUserItems()
@@ -89,6 +95,7 @@ class AdminComposer
 
     /**
      * Set the item as active if it needs to be, and set the property
+     *
      * @param  array    &$link  The link array that we should set active
      * @param  string   $route  The route to check against
      * @param  array    $except Any routes to exclude
@@ -106,5 +113,50 @@ class AdminComposer
         $this->auto = false;
         $link['active'] = true;
         return true;
+    }
+
+    /**
+     * Add the links for the playbook meta categories
+     *
+     * @return void
+     */
+    protected function doPlaybookMetaItems()
+    {
+        if (!Entrust::can('manage_playbook_meta')) return;
+
+        $items = array();
+        $sections = [
+            'document-types' => 'Document Types',
+            'competitors' => 'Competitors',
+            'markets' => 'Markets',
+            'industries' => 'Industries',
+            'operating-regions' => 'Operating Regions',
+            'planview-regions' => 'Sales Regions',
+            'planview-subregions' => 'Sales Subregions',
+        ];
+
+        foreach ($sections as $id => $title) {
+            $singleTitle = str_singular($title);
+
+            $index = [
+                'title' => "All $title",
+                'link'  => URL::route("admin.{$id}.index")
+            ];
+
+            $this->maybeSetActive($index, "admin.{$id}", ['index', 'create']);
+
+            $items[] = $index;
+
+            $items[] = [
+                'title' => "Add New $singleTitle",
+                'link'  => URL::route("admin.{$id}.create")
+            ];
+
+            $items[] = 'divider';
+        }
+
+        array_splice($items, -1);
+
+        $this->menuItems[] = ['Playbook Categories', $items];
     }
 }

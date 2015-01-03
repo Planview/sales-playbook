@@ -9,7 +9,10 @@ use \Input;
 
 use \Market;
 
-class MarketsController extends \BaseController {
+class MarketsController extends \BaseController
+{
+
+    protected $permission = 'manage_playbook_meta';
 
     /**
      * Display a listing of the resource.

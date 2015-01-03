@@ -9,7 +9,10 @@ use \Redirect;
 
 use \DocumentType;
 
-class DocumentTypesController extends \BaseController {
+class DocumentTypesController extends \BaseController
+{
+
+    protected $permission = 'manage_playbook_meta';
 
     /**
      * Display a listing of the resource.

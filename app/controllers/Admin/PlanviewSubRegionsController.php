@@ -10,7 +10,10 @@ use \Input;
 use PlanviewSubRegion;
 use PlanviewRegion;
 
-class PlanviewSubRegionsController extends \BaseController {
+class PlanviewSubRegionsController extends \BaseController
+{
+
+    protected $permission = 'manage_playbook_meta';
 
     /**
      * Display a listing of the resource.

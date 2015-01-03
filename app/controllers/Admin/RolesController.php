@@ -9,7 +9,8 @@ use Input;
 use Role;
 use Permission;
 
-class RolesController extends \BaseController {
+class RolesController extends \BaseController
+{
 
     protected $permission = 'manage_roles';
 

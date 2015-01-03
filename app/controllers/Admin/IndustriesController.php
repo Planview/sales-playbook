@@ -9,7 +9,10 @@ use \Input;
 
 use \Industry;
 
-class IndustriesController extends \BaseController {
+class IndustriesController extends \BaseController
+{
+
+    protected $permission = 'manage_playbook_meta';
 
     /**
      * Display a listing of the resource.

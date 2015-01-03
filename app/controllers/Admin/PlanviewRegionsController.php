@@ -9,7 +9,10 @@ use \Redirect;
 
 use \PlanviewRegion;
 
-class PlanviewRegionsController extends \BaseController {
+class PlanviewRegionsController extends \BaseController
+{
+
+    protected $permission = 'manage_playbook_meta';
 
     /**
      * Display a listing of the resource.

@@ -4,7 +4,8 @@ namespace Admin;
 
 use \View;
 
-class HomeController extends \BaseController {
+class HomeController extends \BaseController
+{
 
     /*
     |--------------------------------------------------------------------------

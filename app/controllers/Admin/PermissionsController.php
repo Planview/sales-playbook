@@ -9,7 +9,8 @@ use View;
 use Permission;
 use Role;
 
-class PermissionsController extends \BaseController {
+class PermissionsController extends \BaseController
+{
 
     protected $permission = 'manage_permissions';
 

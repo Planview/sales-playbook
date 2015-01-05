@@ -13,3 +13,10 @@ View::composer('admin.customers.form', function ($view)
         ->with('opRegions', OperatingRegion::optionsList())
         ->with('pvRegions', PlanviewRegion::optionsListSubregions());
 });
+
+View::composer('admin.documents.form', function ($view)
+{
+    return $view
+        ->with('customers', Customer::optionsList())
+        ->with('types', DocumentType::optionsList());
+});

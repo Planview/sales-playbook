@@ -68,6 +68,7 @@ Route::group(
     Route::model('planview-regions', 'PlanviewRegion');
     Route::model('planview-subregions', 'PlanviewSubRegion');
     Route::model('customers', 'Customer');
+    Route::model('documents', 'Document');
 });
 
 Route::group(['prefix' => 'auth'], function ()

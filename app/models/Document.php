@@ -16,7 +16,9 @@ class Document extends Ardent
      */
     protected $fillable = [
         'title',
-        'url'
+        'url',
+        'document_type_id',
+        'customer_id'
     ];
 
     /**

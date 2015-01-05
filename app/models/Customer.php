@@ -89,6 +89,7 @@ class Customer extends Ardent
 
     /**
      * Get the ID's of all the markets
+     *
      * @return  array   All the ID's
      */
     public function marketsById()
@@ -98,6 +99,7 @@ class Customer extends Ardent
 
     /**
      * Get the ID's of all the competitors
+     *
      * @return  array   All the ID's
      */
     public function competitorsById()
@@ -107,6 +109,7 @@ class Customer extends Ardent
 
     /**
      * Abstract getting the ID's of related objects
+     *
      * @param   string  $name   The property to iterate over
      * @return  array           All the item ID's in an array
      */
@@ -116,6 +119,17 @@ class Customer extends Ardent
 
         foreach ($this->$name as $item) {
             $list[] = $item->id;
+        }
+
+        return $list;
+    }
+
+    public static function optionsList()
+    {
+        $list = array();
+
+        foreach (self::orderBy('name', 'asc')->get() as $customer) {
+            $list[$customer->id] = $customer->name;
         }
 
         return $list;

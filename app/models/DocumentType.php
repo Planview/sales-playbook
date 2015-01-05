@@ -56,4 +56,16 @@ class DocumentType extends Ardent
 
         return true;
     }
+
+    public static function optionsList()
+    {
+        $list = array();
+
+        foreach (self::orderBy('name', 'asc')->get() as $type) {
+            $list[$type->id] = $type->name;
+        }
+
+        return $list;
+    }
+
 }

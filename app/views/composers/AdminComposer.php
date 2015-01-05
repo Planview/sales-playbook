@@ -36,8 +36,9 @@ class AdminComposer
             'title' => 'Dashboard',
             'link' => URL::route('admin.dashboard')
         ];
-        $this->doUserItems();
+        $this->doPlaybookItems();
         $this->doPlaybookMetaItems();
+        $this->doUserItems();
     }
 
     /**
@@ -62,35 +63,15 @@ class AdminComposer
     {
         $userItems = array();
         $permissions = ['manage_users', 'manage_roles', 'manage_permissions'];
+        $sections = [
+            'users' => ['Users', 'manage_users'],
+            'roles' => ['Roles', 'manage_roles'],
+            'permissions'   => ['Permissions', 'manage_permissions']
+        ];
 
         if (!Entrust::user()->ability([], $permissions)) return;
 
-        foreach ($permissions as $perm) {
-            if (!Entrust::can($perm)) continue;
-
-            $section = str_replace('manage_', '', $perm);
-            $title = ucfirst($section);
-            $singleTitle = str_singular($title);
-
-            $index = [
-                'title' => "All {$title}",
-                'link'  => URL::route("admin.{$section}.index")
-            ];
-            $this->maybeSetActive($index, "admin.{$section}", ['index', 'create']);
-
-            $userItems[] = $index;
-
-            $userItems[] = [
-                'title' => "Add New {$singleTitle}",
-                'link'  => URL::route("admin.{$section}.create")
-            ];
-
-            $userItems[] = 'divider';
-        }
-
-        array_splice($userItems, -1);
-
-        $this->menuItems[] = ['Users', $userItems];
+        $this->doSectionLinks('Users', $sections);
     }
 
     /**
@@ -124,7 +105,6 @@ class AdminComposer
     {
         if (!Entrust::can('manage_playbook_meta')) return;
 
-        $items = array();
         $sections = [
             'document-types' => 'Document Types',
             'competitors' => 'Competitors',
@@ -135,7 +115,33 @@ class AdminComposer
             'planview-subregions' => 'Sales Subregions',
         ];
 
-        foreach ($sections as $id => $title) {
+        $this->doSectionLinks('Playbook Categories', $sections);
+    }
+
+    protected function doPlaybookItems()
+    {
+        if (!Entrust::can('manage_playbook')) return;
+
+        $sections = [
+            'documents' => 'Documents',
+            'customers' => 'Customers'
+        ];
+
+        $this->doSectionLinks('Playbook', $sections);
+    }
+
+    protected function doSectionLinks($sectionTitle, $links)
+    {
+        $items = array();
+
+        foreach ($links as $id => $link) {
+            if (is_array($link)) {
+                if (!Entrust::can($link[1])) continue;
+                $title = $link[0];
+            } else {
+                $title = $link;
+            }
+
             $singleTitle = str_singular($title);
 
             $index = [
@@ -157,6 +163,6 @@ class AdminComposer
 
         array_splice($items, -1);
 
-        $this->menuItems[] = ['Playbook Categories', $items];
+        $this->menuItems[] = [$sectionTitle, $items];
     }
 }

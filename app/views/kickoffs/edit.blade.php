@@ -1,0 +1,1 @@
+/home/vagrant/Code/sales-resource-center/app/views/kickoffs/edit.blade.php

@@ -20,6 +20,14 @@ Route::get('/playbook', function () {
     return View::make('playbook');
 });
 
+
+Route::bind('kickoff', function ($value, $route) {
+    return Kickoff::where('name', $value)->first();
+});
+Route::get('kickoff/{kickoff}/{pageSlug}', ['as' => 'kickoff.showPage', 'uses' => 'KickoffsController@showPage']);
+Route::resource('kickoff', 'KickoffsController', ['only' => ['index', 'show']]);
+
+
 Route::group(
     [
         'prefix' => 'api',
@@ -55,6 +63,8 @@ Route::group(
     Route::resource('users', 'UsersController', ['except' => ['edit']]);
     Route::resource('roles', 'RolesController', ['except' => ['edit']]);
     Route::resource('permissions', 'PermissionsController', ['except' => ['edit']]);
+    Route::resource('kickoffs', 'KickoffsController', ['except' => 'edit']);
+    Route::resource('kickoffs.pages', 'KickoffPagesController', ['except' => 'edit']);
 
     // Route model binding
     Route::model('users', 'User');
@@ -69,6 +79,8 @@ Route::group(
     Route::model('planview-subregions', 'PlanviewSubRegion');
     Route::model('customers', 'Customer');
     Route::model('documents', 'Document');
+    Route::model('kickoffs', 'Kickoff');
+    Route::model('pages', 'Kickoff\\Page');
 });
 
 Route::group(['prefix' => 'auth'], function ()

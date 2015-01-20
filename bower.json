@@ -28,6 +28,7 @@
     "angular-ui-bootstrap-bower": "~0.11.2",
     "jasny-bootstrap": "master",
     "font-awesome": "~4.2.0",
-    "codemirror": "~4.9.0"
+    "codemirror": "~4.9.0",
+    "codemirror-emmet": "~1.1.0"
   }
 }

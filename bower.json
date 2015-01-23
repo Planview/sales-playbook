@@ -29,6 +29,8 @@
     "jasny-bootstrap": "master",
     "font-awesome": "~4.2.0",
     "codemirror": "~4.9.0",
-    "codemirror-emmet": "~1.1.0"
+    "codemirror-emmet": "~1.1.0",
+    "jquery-file-upload": "~9.9.2",
+    "jquery-ui": "~1.11.2"
   }
 }

@@ -36,6 +36,10 @@ class PermissionsTableSeeder extends Seeder {
             'name'  => 'manage_kickoffs',
             'display_name'  => 'Manage Sales Kickoff Sites'
         ]);
+        Permission::create([
+            'name'  => 'upload_files',
+            'display_name'  => 'Upload New Files'
+        ]);
     }
 
 }

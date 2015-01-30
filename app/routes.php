@@ -65,6 +65,7 @@ Route::group(
     Route::resource('permissions', 'PermissionsController', ['except' => ['edit']]);
     Route::resource('kickoffs', 'KickoffsController', ['except' => 'edit']);
     Route::resource('kickoffs.pages', 'KickoffPagesController', ['except' => 'edit']);
+    Route::resource('uploads', 'UploadsController', ['except' => 'edit']);
 
     // Route model binding
     Route::model('users', 'User');
@@ -81,6 +82,7 @@ Route::group(
     Route::model('documents', 'Document');
     Route::model('kickoffs', 'Kickoff');
     Route::model('pages', 'Kickoff\\Page');
+    Route::model('uploads', 'Upload');
 });
 
 Route::group(['prefix' => 'auth'], function ()

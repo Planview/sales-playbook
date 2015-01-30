@@ -19,6 +19,7 @@ class PermissionRoleTableSeeder extends Seeder {
             ->firstOrFail();
         $manageKickoffs = Permission::where('name', 'manage_kickoffs')
             ->firstOrFail();
+        $uploadFiles = Permission::where('name', 'upload_files')->firstOrFail();
 
         $admin->perms()->sync([
             $manageUsers->id,
@@ -28,6 +29,7 @@ class PermissionRoleTableSeeder extends Seeder {
             $managePlaybookMeta->id,
             $managePlaybook->id,
             $manageKickoffs->id,
+            $uploadFiles->id,
         ]);
     }
 

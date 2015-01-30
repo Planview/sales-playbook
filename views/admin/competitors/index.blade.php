@@ -9,6 +9,9 @@ All Competitors
         <a href="{{ URL::route('admin.competitors.create') }}" class="btn btn-success pull-right"><span class="fa fa-plus"></span> Add New Competitor</a>
         <h1>All Competitors</h1>
     </header>
+
+    {{ $competitors->links() }}
+
     @if ($competitors)
         <ul class="list-group">
             @foreach ($competitors as $competitor)
@@ -26,4 +29,7 @@ All Competitors
             @endforeach
         </ul>
     @endif
+
+    {{ $competitors->links() }}
+
 @stop

@@ -26,7 +26,7 @@ return array(
 	|
 	*/
 
-	'public' => __DIR__.'/../public',
+	'public' => 'production' === $app->environment() ? __DIR__.'/../html' : __DIR__.'/../public',
 
 	/*
 	|--------------------------------------------------------------------------

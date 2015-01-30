@@ -62,6 +62,13 @@
                         Form::help('Use this if the user should not receive a confirmation email'),
                         3
                     ) }}
+                    {{ ControlGroup::generate(
+                        Form::label('auto_password', 'Auto-generate Password'),
+                        '<div class="checkbox"><label>' . Form::checkbox('auto_password', 1, Input::old('auto_password')) . ' Generate a password and email it to the user</label></div>',
+                        Form::help('The user&rsquo;s account will be confirmed and the credentials will be sent to the user'),
+                        3
+                    ) }}
+
                 @endif
             </fieldset>
         </div>

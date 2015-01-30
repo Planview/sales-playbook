@@ -60,17 +60,38 @@ class UsersController extends \BaseController
      */
     public function store()
     {
-        $repo = App::make('UserRepository');
-        $user = $repo->signup(Input::all());
+        $password = '';
 
-        if ($user->id) {
+        $user = new User();
+
+        $user->username = Input::get('username');
+        $user->email    = Input::get('email');
+        $user->confirmation_code = md5(uniqid(mt_rand(), true));
+
+        if (Input::get('auto_password', false)) {
+            $password = $user->autoGeneratePassword();
+        } else {
+            $user->password = Input::get('password');
+            $user->password_confirmation = Input::get('password_confirmation');
+        }
+
+        if ($user->save()) {
             if (Input::has('roles')) {
                 $user->roles()->sync(Input::get('roles'));
             }
 
-            if (null === Input::get('auto_confirm') && Config::get('confide::signup_email')) {
-                Mail::queueOn(
-                    Config::get('confide::email_queue'),
+            if (Input::get('auto_password', false)) {
+                $user->confirm();
+
+                Mail::send(
+                    'emails.auth.auto-password', ['user' => $user, 'password' => $password],
+                    function ($message) use ($user) {
+                        $message
+                            ->to($user->email, $user->username)
+                            ->subject('Your Planview Sales Site Credentials');
+                    });
+            } elseif (null === Input::get('auto_confirm') && Config::get('confide::signup_email')) {
+                Mail::send(
                     Config::get('confide::email_account_confirmation'),
                     compact('user'),
                     function ($message) use ($user) {
@@ -86,7 +107,6 @@ class UsersController extends \BaseController
             return Redirect::action('admin.users.show', $user->id)
                 ->with('message', "The user {$user->username} was successfully created");
         } else {
-            \Log::info($user->errors());
             $error = $user->errors()->all(':message');
 
             return Redirect::route('admin.users.create')

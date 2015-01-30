@@ -27,12 +27,12 @@ Login
                     <input tabindex="4" type="checkbox" name="remember" id="remember" value="1"> {{{ Lang::get('confide::confide.login.remember') }}}
                 </label>
             </div>
-            @if (Session::get('error'))
+            @if (Session::has('error'))
                 <div class="alert alert-error alert-danger">{{{ Session::get('error') }}}</div>
             @endif
 
-            @if (Session::get('notice'))
-                <div class="alert">{{{ Session::get('notice') }}}</div>
+            @if (Session::has('notice'))
+                <div class="alert alert-info">{{{ Session::get('notice') }}}</div>
             @endif
             <div class="form-group">
                 <button tabindex="3" type="submit" class="btn btn-primary btn-block">{{{ Lang::get('confide::confide.login.submit') }}}</button>

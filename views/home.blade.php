@@ -12,6 +12,16 @@
     </head>
 </head>
 <body>
+    @if (Session::has('message'))
+        <div class="container">
+            <div class="alert alert-info alert-dismissable">
+                <button class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <p>{{{ Session::get('message') }}}</p>
+            </div>
+        </div>
+    @endif
     <div class="container home-container">
         <h1 class="pv-logo pv-logo-lg">Planview</h1>
         {{ $content }}

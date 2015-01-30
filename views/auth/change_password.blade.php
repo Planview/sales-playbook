@@ -1,21 +1,22 @@
 @extends('auth.layout')
 
 @section('title')
-Reset Password
+Change Password
 @stop
 
 @section('body')
-    {{ Form::open(['action' => 'UsersController@doResetPassword']) }}
+    {{ Form::open(['action' => 'UsersController@doChangePassword']) }}
         <fieldset>
-            <legend>Reset Your Password</legend>
-            <input type="hidden" name="token" value="{{{ $token }}}">
+            <legend>Change Your Password</legend>
             <div class="form-group">
                 <label for="password">New Password</label>
                 <input class="form-control" placeholder="New Password" type="password" name="password" id="password">
+                {{ $errors->first('password', '<span class="label label-danger">:message</span>')}}
             </div>
             <div class="form-group">
                 <label for="password_confirmation">{{{ Lang::get('confide::confide.password_confirmation') }}}</label>
                 <input class="form-control" placeholder="{{{ Lang::get('confide::confide.password_confirmation') }}}" type="password" name="password_confirmation" id="password_confirmation">
+                {{ $errors->first('password_confirmation', '<span class="label label-danger">:message</span>')}}
             </div>
 
             @if (Session::get('error'))

@@ -4,3 +4,5 @@
         <li><a href="{{ route('admin.dashboard') }}">Admin Area</a></li>
     @endif
 </ul>
+
+<a href="{{ route('auth.changePassword') }}" class="label label-default">Change Your Password</a>

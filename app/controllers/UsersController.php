@@ -196,4 +196,37 @@ class UsersController extends Controller
 
         return Redirect::to('/');
     }
+
+    /**
+     * Allow a logged in user to change their password
+     *
+     * @return Illuminate\Http\Response
+     */
+    public function changePassword()
+    {
+        return View::make('auth.change_password');
+    }
+
+    /**
+     * Change a user's password
+     *
+     * @return Illuminate\Http\Response
+     */
+    public function doChangePassword()
+    {
+        $user = Auth::user();
+
+        $user->password = Input::get('password');
+        $user->password_confirmation = Input::get('password_confirmation');
+
+        if ($user->save()) {
+            return Redirect::to('/')
+                ->withMessage('Your password has been updated');
+        } else {
+            return Redirect::action('UsersController@changePassword')
+                ->withError('Your password could not be updated. ' .
+                    'Please see the field errors for more information')
+                ->withErrors($user->errors());
+        }
+    }
 }

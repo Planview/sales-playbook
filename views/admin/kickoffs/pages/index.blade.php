@@ -19,7 +19,7 @@
             @foreach ($pages as $page)
                 <li class="list-group-item">
                     <h4 class="list-group-item-heading">{{ $page->slug }}</h4>
-                    {{ Button::primary('Edit')->asLinkTo(route('admin.kickoffs.pages.create', $kickoff->id, $page->id)) }}
+                    {{ Button::primary('Edit')->asLinkTo(route('admin.kickoffs.pages.show', [$kickoff->id, $page->id])) }}
 
                 </li>
             @endforeach

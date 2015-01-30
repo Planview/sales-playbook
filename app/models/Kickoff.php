@@ -31,4 +31,20 @@ class Kickoff extends Ardent
     public function pageBySlug($slug) {
         return $this->pages()->where('slug', $slug)->first();
     }
+
+    public function menuArray()
+    {
+        $menu = explode("\n", $this->menu);
+
+        for ($i=0; $i < count($menu); $i++) {
+            $temp = explode(',', $menu[$i]);
+
+            $menu[$i] = array();
+
+            $menu[$i]['title'] = trim($temp[0]);
+            $menu[$i]['link'] = trim($temp[1]);
+        }
+
+        return $menu;
+    }
 }

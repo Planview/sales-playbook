@@ -11,6 +11,7 @@ use \Kickoff;
 
 class KickoffsController extends \BaseController
 {
+    protected $permission = 'manage_kickoffs';
 
     public function index()
     {

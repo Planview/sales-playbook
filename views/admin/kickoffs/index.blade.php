@@ -21,6 +21,7 @@ Sales Kickoff Sites
                     {{ Form::inline(['route' => ['admin.kickoffs.destroy', $kickoff->id], 'class' => 'form-button', 'method' => 'delete']) }}
                         {{ Button::danger('Delete')->submit() }}
                     {{ Form::close() }}
+                    {{ Button::success('View Pages')->asLinkTo(route('admin.kickoffs.pages.index', $kickoff->id)) }}
                 </li>
             @endforeach
         </ul>

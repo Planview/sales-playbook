@@ -32,9 +32,6 @@ class KickoffsController extends \BaseController {
 
     public function makePage($kickoff, $pageSlug)
     {
-        /*return*/ $hello =  $kickoff->pageBySlug($pageSlug)/*->buildPage()*/;
-
-        \Log::info($hello->kickoff);
-        return $hello->buildPage();
+        return $kickoff->pageBySlug($pageSlug)->buildPage();
     }
 }

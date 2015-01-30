@@ -12,6 +12,8 @@ use Kickoff\Page;
 
 class KickoffPagesController extends \BaseController
 {
+    protected $permission = 'manage_kickoffs';
+
     public function index($kickoff)
     {
         return View::make('admin.kickoffs.pages.index')

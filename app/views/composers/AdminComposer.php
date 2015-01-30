@@ -38,6 +38,7 @@ class AdminComposer
         ];
         $this->doPlaybookItems();
         $this->doPlaybookMetaItems();
+        $this->doKickoffItems();
         $this->doUserItems();
     }
 
@@ -128,6 +129,18 @@ class AdminComposer
         ];
 
         $this->doSectionLinks('Playbook', $sections);
+    }
+
+    protected function doKickoffItems()
+    {
+        if (!Entrust::can('manage_kickoffs'))
+            return;
+
+        $sections = [
+            'kickoffs' => 'Kickoffs'
+        ];
+
+        $this->doSectionLinks('Sales Kickoffs', $sections);
     }
 
     protected function doSectionLinks($sectionTitle, $links)

@@ -32,6 +32,10 @@ class PermissionsTableSeeder extends Seeder {
             'name'  => 'manage_playbook',
             'display_name'  => 'Manage Playbook Data'
         ]);
+        Permission::create([
+            'name'  => 'manage_kickoffs',
+            'display_name'  => 'Manage Sales Kickoff Sites'
+        ]);
     }
 
 }

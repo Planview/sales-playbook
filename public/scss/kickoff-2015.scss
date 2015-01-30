@@ -1,0 +1,122 @@
+@import "kickoffs/2015/variables";
+
+body {
+  font-weight: 300;
+}
+
+// bower:scss
+@import "bootstrap-sass-official/assets/stylesheets/_bootstrap.scss";
+// endbower
+
+.navbar-default {
+  @media screen and (min-width: $grid-float-breakpoint) {
+    background-color: rgba($navbar-default-bg, 0.95);
+  }
+}
+
+.navbar-nav li {
+  font-weight: 500;
+}
+
+.site-footer {
+  background-color: $brand-primary;
+  color: #fff;
+  padding: {
+    top: 10px;
+    bottom: 10px;
+  }
+}
+
+.copyright {
+  text-align: center;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+.planview {
+  text-align: center;
+  padding: {
+    top: 20px;
+    bottom: 20px;
+  }
+}
+.planview-logo {
+  @include text-hide();
+  display: inline-block;
+  width: 160px;
+  height: 269px * 160px / 1163px;
+  background: {
+    position: center center;
+    repeat: no-repeat;
+    size: contain;
+    attachment: scroll;
+  }
+}
+.planview-logo.white {
+  background-image: url('../img/kickoffs/2015/logo-planview-white.png');
+}
+.laser-header {
+  padding-top: $navbar-height;
+  margin-top: -$navbar-height - $navbar-margin-bottom;
+  background-color: $gray-dark;
+  color: #fff;
+  background: {
+    image: url('../img/kickoffs/2015/fuse-B.jpg');
+    position: center 80%;
+    repeat: no-repeat;
+    size: cover;
+    attachment: scroll;
+  }
+  @media screen and (min-width: $screen-sm-min) {
+    padding-top: $navbar-height + ($jumbotron-padding * 3.2);
+  }
+  &.home {
+    padding-top: $navbar-height + 4 * $jumbotron-padding;
+
+    @media screen and (min-width: $screen-sm-min) {
+      padding-top: $navbar-height + ($jumbotron-padding * 6.4);
+    }
+  }
+}
+
+.navbar-brand {
+  @include text-hide();
+  display: inline-block;
+  height: 92px;
+  width: 200px;
+  margin: {
+    top: ($navbar-height - 92px) / 2;
+    bottom: ($navbar-height - 92px) / 2;
+    left: $grid-gutter-width / 2;
+  }
+  background: {
+    image: url('../img/kickoffs/2015/kickoff-logo.png');
+    position: center center;
+    repeat: no-repeat;
+    size: contain;
+    attachment: scroll;
+  }
+  @media screen and (min-width: $screen-sm-min) {
+    width: 287px;
+    margin-left: 0 !important;
+  }
+}
+
+.page-header-band {
+  background-color: $gray-darker;
+  background-color: rgba($gray-darker, 0.8);
+  padding: {
+    top: 20px;
+    bottom: 0;
+  }
+  color: #fff;
+  h1 {
+    margin: 0;
+    @media screen and (min-width: $screen-md-min) {
+      font-size: floor(($font-size-base * 3.0))
+    }
+  }
+}

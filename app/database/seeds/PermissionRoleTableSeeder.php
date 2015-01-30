@@ -17,6 +17,8 @@ class PermissionRoleTableSeeder extends Seeder {
             ->firstOrFail();
         $managePlaybook = Permission::where('name', 'manage_playbook')
             ->firstOrFail();
+        $manageKickoffs = Permission::where('name', 'manage_kickoffs')
+            ->firstOrFail();
 
         $admin->perms()->sync([
             $manageUsers->id,
@@ -25,6 +27,7 @@ class PermissionRoleTableSeeder extends Seeder {
             $viewAdmin->id,
             $managePlaybookMeta->id,
             $managePlaybook->id,
+            $manageKickoffs->id,
         ]);
     }
 

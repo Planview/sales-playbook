@@ -11,7 +11,7 @@
         {{ HTML::script('bower_components/modernizr/modernizr.js') }}
     </head>
 </head>
-<body>
+<body class="{{{ $bodyClass }}}">
     @if (Session::has('message'))
         <div class="container">
             <div class="alert alert-info alert-dismissable">

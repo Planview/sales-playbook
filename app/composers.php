@@ -20,3 +20,14 @@ View::composer('admin.documents.form', function ($view)
         ->with('customers', Customer::optionsList())
         ->with('types', DocumentType::optionsList());
 });
+
+View::composer('home', function ($view)
+{
+    if (Auth::check()) {
+        $class = 'auth';
+    } else {
+        $class = 'guest';
+    }
+
+    return $view->with('bodyClass', $class);
+});

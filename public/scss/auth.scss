@@ -15,7 +15,7 @@ $headings-font-weight:    500;
 .auth-container,
 .home-container {
     @media screen and (min-width: $screen-sm-min) {
-        margin-top: 100px;
+        margin-top: 80px;
     }
 }
 
@@ -40,4 +40,8 @@ $headings-font-weight:    500;
 .pv-logo-lg {
     height: 140px;
     margin-bottom: 60px;
+    .auth & {
+        height: 80px;
+        margin-bottom: 40px;
+    }
 }

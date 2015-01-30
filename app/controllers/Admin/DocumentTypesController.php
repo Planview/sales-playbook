@@ -51,6 +51,7 @@ class DocumentTypesController extends \BaseController
     public function store()
     {
         $type = DocumentType::create(Input::all());
+        $type->internal_only = Input::get('internal_only', 0);
 
         if ($type->save()) {
             return Redirect::route('admin.document-types.show', $type->id)

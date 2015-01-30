@@ -46,10 +46,10 @@ return array(
     |
     |
     */
-    'login_form' =>             'confide::login',
-    'signup_form' =>            'confide::signup',
-    'forgot_password_form' =>   'confide::forgot_password',
-    'reset_password_form' =>    'confide::reset_password',
+    'login_form' =>             'auth.login',
+    'signup_form' =>            'auth.signup',
+    'forgot_password_form' =>   'auth.forgot_password',
+    'reset_password_form' =>    'auth.reset_password',
 
     /*
     |--------------------------------------------------------------------------

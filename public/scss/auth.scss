@@ -1,0 +1,43 @@
+@import "variables";
+$font-family-sans-serif:  'Avenir W01', Arial, sans-serif;
+$font-size-base:          16px;
+$headings-font-weight:    500;
+
+
+@import "bootstrap-sass-official/assets/stylesheets/bootstrap";
+
+.auth-container {
+    @include container-fixed();
+    width: 400px;
+    max-width: 100%;
+}
+
+.auth-container,
+.home-container {
+    @media screen and (min-width: $screen-sm-min) {
+        margin-top: 100px;
+    }
+}
+
+.home-container {
+    text-align: center;
+}
+
+.pv-logo {
+    @include text-hide();
+    background: {
+        image: url('../img/logo-planview-color.png');
+        attachment: scroll;
+        position: center;
+        repeat: no-repeat;
+        size: contain;
+    }
+    height: 80px;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.pv-logo-lg {
+    height: 140px;
+    margin-bottom: 60px;
+}

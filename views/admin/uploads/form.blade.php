@@ -23,8 +23,9 @@
 
             {{ ControlGroup::generate(
                 Form::label('file', 'File'),
-                Form::file('file', ['required']),
-                null,
+                Form::file('file', ['required']) .
+                    $errors->first('file', '<span class="label label-danger">:message</span>'),
+                Form::help($fileHelp),
                 3
             ) }}
 

@@ -40,6 +40,7 @@ class AdminComposer
         $this->doPlaybookMetaItems();
         $this->doKickoffItems();
         $this->doUserItems();
+        $this->doUploads();
     }
 
     /**
@@ -141,6 +142,19 @@ class AdminComposer
         ];
 
         $this->doSectionLinks('Sales Kickoffs', $sections);
+    }
+
+    protected function doUploads()
+    {
+        if (!Entrust::can('upload_files')) {
+            return;
+        }
+
+        $sections = [
+            'uploads' => 'Uploads'
+        ];
+
+        $this->doSectionLinks('Uploads', $sections);
     }
 
     protected function doSectionLinks($sectionTitle, $links)

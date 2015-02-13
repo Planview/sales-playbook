@@ -1,12 +1,18 @@
 <?php
 
 use LaravelBook\Ardent\Ardent;
+use Symfony\Component\HttpFoundation\File\File as SymfonyFile;
+use Illuminate\Support\MessageBag;
 
 class Upload extends Ardent
 {
     const ASSETS_DIR = 'assets';
 
     protected $filePointer;
+
+    protected $allowSave = true;
+
+    public $uploadValidationErrors;
 
     public static $rules = [
         'name'      => 'required',
@@ -18,6 +24,25 @@ class Upload extends Ardent
     protected $fillable = [
         'name', 'filename', 'mime', 'directory'
     ];
+
+    protected $fileInfo;
+
+    public function __construct(array $attributes = array()) {
+        parent::__construct($attributes);
+        $this->uploadValidationErrors = new MessageBag;
+    }
+
+    public function file()
+    {
+        // \Log::info($this->original['id']);
+        if (null === $this->id) {
+            throw new Exception("No File Available", 1);
+        } elseif (null === $this->fileInfo) {
+            $this->fileInfo = new SymfonyFile($this->filePath());
+        }
+
+        return $this->fileInfo;
+    }
 
     public function filePointer()
     {
@@ -78,8 +103,11 @@ class Upload extends Ardent
 
     protected static function setupInputFile($input)
     {
-        if (!(Input::hasFile($input) && Input::file($input)->isValid()))
+        if (!(Input::hasFile($input) && Input::file($input)->isValid())) {
+            $this->addFileError('The upload was not successful');
+
             return [];
+        }
 
         $file = Input::file($input);
 
@@ -165,6 +193,73 @@ class Upload extends Ardent
 
     public function replaceFromInput($input)
     {
-        return $this->fill(self::setupInputFile());
+        if (!(Input::hasFile($input) && Input::file($input)->isValid())) {
+            $this->addFileError('The upload was not successful');
+
+            return $this;
+        }
+
+        $new = Input::file($input);
+
+        if ($this->mime !== $new->getMimeType()) {
+            $this->addFileError('The MIME types must match in order to ' .
+                'replace a file.');
+            $this->allowSave = false;
+
+            return $this;
+        }
+
+
+        $current = $this->file();
+        $path =  $current->getPath() . '/';
+
+        $old = self::uniqueFileName(
+            $current->getFilename(),
+            $current->getExtension(),
+            $path
+        );
+
+        $oldRenamed = rename($this->filepath(), $path . $old);
+
+        if (!$oldRenamed) {
+            $this->addFileError('The old file could not be renamed.');
+
+            return $this;
+        }
+
+        $new->move($path, $this->filename);
+
+        unlink($path . $old);
+
+        return $this;
+    }
+
+    public function addFileError($message) {
+        $this->uploadValidationErrors->add('file', $message);
+        $this->allowSave = false;
+    }
+
+    public function afterValidate($upload)
+    {
+        if ($upload->errors()->has('filename') ||
+                $upload->errors()->has('mime') ||
+                $upload->errors()->has('directory')) {
+            $upload->addFileError('The file could not be saved.');
+        }
+    }
+
+    public function beforeSave($upload)
+    {
+        if (!$upload->allowSave) {
+            $upload->errors()->merge($this->uploadValidationErrors);
+            return false;
+        }
+
+        return true;
+    }
+
+    public function afterSave($upload)
+    {
+        $upload->fileInfo = new SymfonyFile($upload->filePath());
     }
 }

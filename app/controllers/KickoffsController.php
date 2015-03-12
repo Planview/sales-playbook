@@ -8,7 +8,7 @@ class KickoffsController extends \BaseController {
     public function __construct() {
         $this->beforeFilter('auth');
 
-	parent::__construct();
+        parent::__construct();
     }
 
     /**

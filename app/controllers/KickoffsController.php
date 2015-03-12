@@ -3,6 +3,15 @@
 class KickoffsController extends \BaseController {
 
     /**
+     * Constructor, add auth filter
+     */
+    public function __construct() {
+        $this->beforeFilter('auth');
+
+	parent::__construct();
+    }
+
+    /**
      * Display a listing of the resource.
      * GET /kickoffs
      *

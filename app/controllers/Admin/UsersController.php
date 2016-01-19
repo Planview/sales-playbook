@@ -26,8 +26,8 @@ class UsersController extends \BaseController
      */
     public function index()
     {
-        //
-        $users = User::paginate(25);
+        //$users = User::paginate(25);
+        $users = User::orderBy('username', 'asc')->paginate(100);
 
         return View::make('admin.users.index')->with('users', $users);
     }

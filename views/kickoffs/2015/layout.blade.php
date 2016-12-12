@@ -25,7 +25,7 @@
         <p class="planview">
           <a href="//www.planview.com"><span class="planview-logo white">Planview</span></a>
         </p>
-        <p class="copyright">&copy; 2015 Planview Inc., All Rights Reserved</p>
+        <p class="copyright">&copy; {{ date('Y') }} <a href="//www.planview.com/">Planview Inc.</a>, All Rights Reserved</p>
       </div>
     </footer>
 

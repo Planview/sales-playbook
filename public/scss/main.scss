@@ -6,6 +6,13 @@
     display: none !important;
 }
 
+.copyright a:link,
+.copyright a:visited,
+.copyright a:hover,
+.copyright a:active {
+    color: #FFF;
+}
+
 .nav, .pagination, .carousel, .panel-title a {
     cursor: pointer;
 }
